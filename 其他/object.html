@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JavaScript对象</title>
+</head>
+
+<body>
+  <script>
+    /* 创建对象 */
+    // 对象直接量
+    var person1 = {
+      name: 'sunmaer',
+      age: 21 // ECMAScript5中，最后一个属性后的逗号将忽略
+    }
+
+    // 通过 new 创建对象
+    var person2 = new Object();
+    person2.name = 'sunmaer';
+    person2.age = 21;
+
+    // Object.create()
+    // 第一个参数指定对象的原型，第二个参数用以对对象的属性进行进一步描述
+    var person3 = Object.create({
+      name: 'sunmaer',
+      age: 21
+    })
+
+    //   var o = { x: 1 }
+    //   console.log('x' in o) // true
+    //   console.log('y' in o) // false
+    //   console.log('toString' in o) // true o 继承toString属性
+
+    // var o = { x: 1 }
+    // console.log(o.hasOwnProperty('x')) // true
+    // console.log(o.hasOwnProperty('y')) // false
+    // console.log(o.hasOwnProperty('toString')) // false
+
+    // var o = { x: 1 }
+    // console.log(o.propertyIsEnumerable('x')) // true
+    // console.log(o.propertyIsEnumerable('y')) // false
+    // console.log(Object.prototype.propertyIsEnumerable('toString')) // false 不可枚举
+
+    // var o = { x: 1 }
+    // console.log(o.x !== undefined) // true
+    // console.log(o.y !== undefined) // false
+    // console.log(o.toString !== undefined) // true
+
+    // var o = {
+    //   x: 1,
+    //   y: 2,
+    //   z: 3
+    // }
+    // console.log(Object.getOwnPropertyNames(o)) // ['x', 'y', 'z']
+    // console.log(Object.keys(o)) // ['x', 'y', 'z']
+    // for(var p in o) {
+    //   console.log(p) // x y z
+    // }
+
+    // var o = {
+    //   x: 1,
+    //   y: 2,
+    //   get p() {
+    //     return this.x + this.y
+    //   },
+    //   set p(newValue) {
+    //     this.x += newValue
+    //     this.y += newValue
+    //   }
+    // }
+    // console.log(o.p) // 3
+    // o.p = 1
+    // console.log(o.x + '-' + o.y) // 2-3
+
+    var o = {
+      x: 1,
+      y: 2
+    }
+    Object.defineProperty(o, 'p', {
+      get: function() {
+        return this.x + this.y
+      },
+      set: function(newValue) {
+        this.x += newValue
+        this.y += newValue
+      },
+      enumerable: false,
+      configurable: false
+    })
+    // Object {enumerable: false, configurable: false, get: function, set: function}
+    console.log(Object.getOwnPropertyDescriptor(o, 'p')) 
+
+    console.log(o.p) // 3
+    o.p = 1
+    console.log(o.x + '-' + o.y) // 2-3
+
+    // Object {value: 1, writable: true, enumerable: true, configurable: true}
+    console.log(Object.getOwnPropertyDescriptor({ x: 1 }, 'x')) 
+
+    console.log(Object.getOwnPropertyDescriptor({ x: 1 }, 'toString')) // undefined
+
+  </script>
+</body>
+
+</html>

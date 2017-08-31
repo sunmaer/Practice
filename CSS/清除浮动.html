@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS 清除浮动总结</title>
+	<style>
+		.father {
+			width: 100%;
+			background-color: gray;
+		}
+		.son1 {
+			float: left;
+			width: 300px;
+			height: 300px;
+			background-color: red;
+		}
+		.son2 {
+			float: left;
+			width: 200px;
+			height: 200px;
+			background-color: blue;
+		}
+		.block {
+			width: 300px;
+			height: 300px;
+			background-color: green;
+		}
+		/* 1. clear清除浮动 */
+		/* 浮动元素后面的元素添加css clear属性 */
+		.block {
+			/*clear: both;*/
+		}
+		/* 2. 给浮动元素父元素设置高度 */
+		.father {
+			/*height: 300px;*/
+		}
+		/* 3. 父元素设置成 inline-block */
+		.father {
+			/*display: inline-block;*/
+		}
+		/* 4. br 清除浮动 */
+		/* br 自带 clear 属性 <br clear="both" /> */
+		/* 5. 父元素添加 overflow: hidden; */
+		.father {
+			/*overflow: hidden;*/
+		}
+		/* 6. 伪类 */
+		.father::after {
+			content: ".";
+			clear: both;
+			display: block;
+			height: 0;
+			overflow: hidden;
+			visibility: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div class="father">	
+		<div class="son1">son1</div>
+		<div class="son2">son2</div>
+	</div>
+	<!-- <br clear="both" /> -->
+	<div class="block" contenteditable="true">son3</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	
+		<script>
+			/**
+			 * JavaScript中匿名函数的调用方式有很多种
+			 */
+			
+			/**
+			 * 方式1：调用函数，得到返回值，强制运算符使函数调用执行
+			 */
+			(function(x,y) {
+				console.log(x+y);
+				return x+y;
+			}(3,4));
+
+			/**
+			 * 方式2：调用函数，得到返回值，强制函数直接量执行再返回一个引用，引用再去调用执行
+			 */
+			(function(x,y) {
+				console.log(x+y);
+				return x+y;
+			})(3,4);
+
+			/**
+			 * 其他方式
+			 * 使用void
+			 * 使用-/+运算符
+			 * 使用波浪符~
+			 * 匿名函数执行放在中括号内
+			 * 匿名函数前加typeof
+			 * 匿名函数前加delete
+			 * 匿名函数前加void
+			 * 使用new方式，传参
+			 * 使用new，不传参
+			 * 逗号运算符
+			 * 按位异或运算符
+			 * 比较运算符
+			 */
+
+		</script>
+
+    </body>
+</html>

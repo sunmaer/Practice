@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组fangfa</title>
+</head>
+<body>
+	<script>
+		
+	// join() 将数组中的所有元素都转化为字符串并连接在一起，返回最后生成的字符串，可以指定分隔符
+	let arr1 = [1, 2, 3, 4, 5, 6, 7, 8]
+	console.log(arr1.join())
+	console.log(arr1.join('|'))
+	console.log(arr1) // 不改变原数组
+
+	// reverse() 将数组中的元素颠倒顺序，返回逆序的数组
+	let arr2 = [1, 2, 3]
+	console.log(arr2.reverse())
+	console.log(arr2) // 改变原数组
+
+	// sort() 将数组中的元素排序并返回排序后的数组  不带参数则为字符串排序，按数组元素在字母表中的顺序排序
+	var arr3 = ['b', 'c', 'a', 'd']
+	console.log(arr3.sort())
+	console.log(arr3) // 改变原数组
+	var arr4 = [1, 312, 32, 4]
+	console.log(arr4.sort(function(a, b) { return a-b }))
+
+	// concat() 创建并返回一个新数组，参数是数组，连接数组的元素
+	let arr5 = [1, 2]
+	console.log(arr5.concat(3, 4))
+	console.log(arr5.concat([3, [4, [5]]]))
+	console.log(arr5) // 不改变原数组
+
+	// slice() 返回指定数组的一个片段或子数组，不包含结束位置
+	var arr6 = [1, 2, 3, 4, 5]
+	console.log(arr6.slice(0, 3)) // [1, 2, 3]
+	console.log(arr6) // 不改变原数组
+	console.log(arr6.slice(2)) // [3, 4, 5]
+	console.log(arr6.slice(-1)) // [5]
+	console.log(arr6.slice(-1, -2)) // []
+
+	// splice() 改变原数组 第一个参数指定起始位置 第二个参数指定删除项数 后面的任意个参数为插入项 返回删除元素组成的数组
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <child-a @upup='change' :msg="message"></child-a>
+        <child-b :msg="message"></child-b>
+        <child-c></child-c>
+        <child-d></child-d>
+    </div>
+
+    <script src="https://cdn.bootcss.com/vue/2.3.4/vue.js"></script>
+    <script>
+        var childA = {
+            template: '<div @click="up">组件A:{{ msg }}</div>',
+            props: ['msg'],
+            methods: {
+                up: function() {
+                    this.$emit('upup', 'Hello my father!')
+                }
+            }
+        }
+        var childB = {
+            template: '<div>组件B:{{ msg }}</div>',
+            props: ['msg']
+        }
+
+        let Hub = new Vue() // 创建事务中心
+        var childC = {
+            template: '<div @click="eve">组件C</div>',
+            methods: {
+                eve: function() {
+                    Hub.$emit('change', 'Hello D,I am C!')
+                }
+            }
+        }
+        var childD = {
+            template: '<div>组件D:{{ msg }}</div>',
+            created() {
+                Hub.$on('change', (msg) => {
+                    this.msg = msg
+                })
+            },
+            data() {
+                return {
+                    msg: ''
+                }
+            }
+        }
+        new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello my son!'
+            },
+            components: {
+                'child-a': childA,
+                'child-b': childB,
+                'child-c': childC,
+                'child-d': childD
+            },
+            methods: {
+                change: function(msg) {
+                    this.message = msg
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Js中获取样式</title>
+	<style>
+		#block {
+			border: 5px solid blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="block" style="width: 100%; height: 200px; background-color: red;"></div>
+
+	<script>
+		var block = document.getElementById('block');
+		console.log(block.style.width); // 100%
+		console.log(getComputedStyle(block, null).width); // 728px
+		console.log(block.style.height); // 200px
+		console.log(getComputedStyle(block, null).height); // 200px
+	</script>
+</body>
+</html>

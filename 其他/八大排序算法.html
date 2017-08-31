@@ -1,0 +1,134 @@
+<!--/*
+ * @Author: sunmaer 😀
+ * @Date: 2017-03-15 23:21:45 
+ * @Last Modified by: mikey.zhaopeng
+ * @Last Modified time: 2017-03-15 23:24:57
+ */-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>八大排序算法</title>
+</head>
+<body>
+    
+    <script>
+        /**
+         * 八大排序算法
+         * 插入排序：直接插入排序和希尔排序
+         * 选择排序：简单选择排序和堆排序
+         * 交换排序：冒泡排序和 快速排序
+         * 归并排序
+         * 基数排序
+         */
+
+         /* 定义一个数组 */
+         var array = new Array(49,38,65,97,76,13,27,49);
+
+         /* 直接插入排序 */
+         function insertSort(arr) {
+             var len = arr.length;
+             var preIndex;
+             var current;
+             for(var i=1;i<len;i++) {
+                 preIndex = i - 1;
+                 current = arr[i];
+                 while(preIndex >= 0 && arr[preIndex] > current) {
+                     arr[preIndex + 1] = arr[preIndex];
+                     preIndex--;
+                 } 
+                 arr[preIndex + 1] = current;
+             }
+             return arr;
+         }
+
+         /* 希尔排序 */
+         function shellSort(arr) {
+             var len = arr.length;
+             var temp;
+             var gap = 1;
+             while(gap < len/3) { //动态定义间隔序列
+                 gap = gap*3 + 1;
+             }
+             for(gap;gap>0;gap=Math.floor(gap/3)) {
+                 for(var i=gap;i<len;i++) {
+                    temp = arr[i];
+                    for(var j=i-gap;j>=0 && arr[j]>temp;j-=gap) {
+                        arr[j+gap] = arr[j];
+                    }
+                    arr[j+gap] = temp;
+                }
+             }
+             return arr;
+         }
+
+         /* 简单选择排序 */
+         function selectSort(arr) {
+             var len = arr.length;
+             var min;
+             var temp;
+             for(var i=0;i<len;i++) {
+                 min = i;
+                 for(var j=i+1;j<len;j++) {
+                     if(arr[min] > arr[j]) {
+                         min = j;
+                     }
+                 }
+                 temp = arr[i];
+                 arr[i] = arr[min];
+                 arr[min] = temp;
+             }
+             return arr;
+         }
+
+         /* 冒泡排序 */
+         function bubbleSort(arr) {
+            var len = arr.length;
+            var temp;
+            for(var i=0;i<len;i++) {
+                for(var j=0;j<len-i-1;j++) {
+                    if(arr[j] > arr[j+1]) {
+                        temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+         }
+
+         /* 快速排序✨ */
+         function quickSort(arr,left,right) {
+             if(left < right) {
+                var i = left;
+                var j = right;
+                var x = arr[left];
+                while(i < j) {
+                    while(i < j && arr[j] > x) {
+                        j--;
+                    }
+                    if(i < j) {
+                        arr[i++] = arr[j];
+                    }
+                    while(i < j && arr[i] < x) {
+                        i++;
+                    }
+                    if(i < j) {
+                        arr[j--] = arr[i];
+                    }
+                }
+                arr[i] = x;
+                quickSort(arr,left,i-1);
+                quickSort(arr,i+1,right);
+             }
+             return arr;
+         }
+
+         alert(quickSort(array,0,array.length-1));
+         
+    </script>
+
+</body>
+</html>

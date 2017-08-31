@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ES5学习</title>
+</head>
+<body>
+    
+
+    <script>
+        /**
+         * ES5的严格模式
+         * 严格模式给作者提供了选择一个限制性更强语言变种的方式
+         * 在js文件或函数的顶部添加"use strict"即可启用严格模式
+         * buggy行为的事情会跑出错误:
+         * 未声明的变量赋值
+         * 不止一次对对象字面量分配相同的属性
+         * 使用with语句
+         */
+        function strictError() {
+            "use strict";
+            varible = 1;
+            with() {
+
+            }
+            var a = {
+                type: "char",
+                type: "char"
+            }
+        }
+        /*strictError();*/
+        
+    </script>
+
+</body>
+</html>

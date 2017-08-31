@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Html5 新增表单元素</title>
+	<style>
+		/* 选择必填表单域 */
+		input:required { 
+			border: 1px solid red;
+		}
+		/* 选择当前聚焦的且含有非法输入值的表单域 */
+		input:focus:invalid {
+			border: 1px solid green;
+		}
+		/* 选择当前聚焦的且含有合法输入值的表单域 */
+		input:focus:valid {
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<ol start="5" reversed type="l">
+		<li>苹果</li>
+		<li>香蕉</li>
+		<li>梨</li>
+		<li>西瓜</li>
+	</ol>
+	<form action="">
+		<div>
+			<label for="email">邮箱：</label>
+			<input type="email" id="email" name="email" required="" placeholder="请输入邮箱">
+		</div>
+		<div>
+			<label for="age">年龄：</label>
+			<input type="number" id="age" name="age" min="10" max="20" placeholder="请输入年龄">
+		</div>
+		<div>
+			<label for="index">个人主页：</label>
+			<input type="url" id="url" name="url" placeholder="请输入个人主页">
+		</div>
+		<div>
+			<label for="tel">手机号码：</label>
+			<input type="tel" id="tel" name="tel" placeholder="请输入手机号码">
+		</div>
+		<div>
+			<label for="search">关键字：</label>
+			<input type="search" id="search" name="search" placeholder="请输入关键字">
+		</div>
+		<div>
+			<label for="pattern">正则表达式：</label>
+			<input type="pattern" id="pattern" name="pattern" pattern="^a">
+		</div>
+		<div>
+			<label for="color">颜色：</label>
+			<input type="color" id="color" name="color">
+		</div>
+		<div>
+			<label for="date">日期：</label>
+			<input type="date" id="date" name="date">
+		</div>
+		<div>
+			<label for="month">月份：</label>
+			<input type="month" id="month" name="month">
+		</div>
+		<div>
+			<label for="week">周：</label>
+			<input type="week" id="week" name="week">
+		</div>
+		<div>
+			<label for="time">时间：</label>
+			<input type="time" id="time" name="time">
+		</div>
+		<div>
+			<label for="datetime">时间：</label>
+			<input type="datetime" id="datetime" name="datetime">
+		</div>		
+		<div>
+			<label for="datetime-local">本地时间：</label>
+			<input type="datetime-local" id="datetime-local" name="datetime-local">
+		</div>
+		<div>
+			<label for="range">输入类型：</label>
+			<input type="range" id="range" name="range" min="1" max="10">
+		</div>
+		<div>
+			<input type="submit" value="提交">
+		</div>
+	</form>
+</body>
+</html>

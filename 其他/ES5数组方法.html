@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES5 数组方法</title>
+</head>
+<body>
+	<script>
+		
+		// ES5 中的数组方法都不会修改原数组，但是传递给这些方法中的函数可以修改这些数组
+		// 两个参数 第一个参数为一个函数，函数三个参数 数组元素 索引 数组本身 第二个参数为调用函数的 this 值
+
+		// forEach() 遍历 从头至尾遍历数组，对数组的每个元素调用指定的函数 无法提前终止遍历
+		var arr = [1, 2, 3, 4, 5]
+		var arr1 = arr.forEach(function(value, index, arr) {
+			console.log(index)
+		})
+		console.log(arr1)
+
+		// map() 映射 返回一个新数组，不改变原数组 
+		var arr2 = arr.map(function(value, index, arr) {
+			return value * 10
+		})
+		console.log(arr2)
+
+		// filter() 过滤 返回数组的一个子集
+		var arr3 = arr.filter(function(value, index, arr) {
+			return value > 3
+		})
+		console.log(arr3)
+
+		// every() 检测 当且仅当数组中的所有元素调用判定函数都返回 true,才返回 true
+		console.log(arr.every(function(value, index, arr) {
+			return value > 0
+		}))
+
+		// some() 检测 只要存在数组中的元素调用判定函数返回 true,就返回 true
+		console.log(arr.some(function(value, index, arr) {
+			return value > 5
+		}))
+		// * 一旦every some确认该返回什么值它们就会停止遍历数组元素
+
+		// reduce() 化简 使用指定的函数将数组的元素进行组合，生成单个值
+		// 第一个参数是一个函数 函数的第一个参数第一次调用时是初始值，以后就是上一次化简函数的返回值，2-4个参数是数组元素 索引 数组本身
+		// 第二个参数是初始值，如果不指定，使用数组的第一个元素作为初始值
+		console.log(arr.reduce(function(x, y) {
+			return x + y
+		}))
+		console.log(arr.reduce(function(x, y) {
+			return x + y
+		}, 1))
+		console.log(arr.reduce(function(x, y) {
+			return x > y ? x : y
+		}))
+
+		// indexOf() lastIndexOf() 返回找到的第一个元素的索引，如果没有找到就返回-1
+		console.log(arr.indexOf(2))
+		console.log(arr.indexOf(5, -1))
+		console.log(arr.indexOf(6))
+
+	</script>
+</body>
+</html>

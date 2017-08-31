@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header,footer {
+            text-align: center;
+            background-color: #666;
+        }
+        .left {
+            text-align: center;
+            background-color: springgreen;
+        }
+        .main {
+            text-align: center;
+            background-color: yellow;
+        }
+        .right {
+            text-align: center;
+            background-color: indianred;
+        }
+
+        /* Float实现圣杯布局 */
+        header,footer {
+            height: 60px;
+        }
+        /* -----------清除浮动😁---------- */
+        /* 给容器加上overflow: hidden; */
+        /*.body {
+            overflow: hidden;
+        }*/
+        /* 容器设置伪元素 */
+        .body:after {
+            display: block;
+            content: "";
+            clear: both;
+        }
+        /* 容器后加空div，设置clear：both；属性 */
+        /* -----------清除浮动---------- */
+
+        .body {
+            padding: 0 200px;
+            overflow: hidden;
+        }
+        .main {
+            float: left;
+            width: 100%;
+            margin-left: -200px;
+        }
+        .left,.right {
+            float: left;
+            width: 200px;
+        }
+        .left {
+            height: 400px;
+            position: relative;
+            right: 200px;
+        }
+        .right {
+            margin-left: -200px;
+            position: relative;
+            left: 200px;
+        }
+        /* 利用padding补偿法实现多列等高 */
+        .main,.left,.right {
+            padding-bottom: 2000px;
+            margin-bottom: -2000px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>#header</header>
+    <div class="body">
+        <div class="left">#left</div>
+        <div class="main">#center</div>
+        <div class="right">#right</div>
+    </div>
+    <footer>#footer</footer>
+    
+</body>
+</html>

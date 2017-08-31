@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<script>
+    		/**
+    		 *JSON.stringify()方法
+    		 * stringify用于从一个对象解析出字符串
+    		 * 1.将对象转换为字符串进行比较
+    		 */
+    		var a = {};//通过对象字面量方式创建的空对象
+    		var b = new Object();//通过Object构造函数创建的空对象
+    		console.log("对象字面量方式:"+(JSON.stringify(a) == "{}"));
+    		console.log("构造函数方式:"+(JSON.stringify(b) == "{}"));
+
+    		/**
+    		 *for in循环方法
+    		 * for...in 语句用于对数组或者对象的属性进行循环操作。
+    		 * 2.使用for in循环可以遍历对象所有属性来判断对象是否为空对象
+    		 */
+    		var a = {};//通过对象字面量方式创建的空对象
+    		var b = new Object();//通过Object构造函数创建的空对象
+    		var c = {a:3};
+    		function isEmptyObject(obj) {
+    			for(var key in obj) {//如果不为空，则会执行到这一步，返回false
+    				return false;
+    			}
+    			return true;//如果为空，则会执行到这一步，返回true
+    		}
+    		console.log("对象a:"+isEmptyObject(a));
+    		console.log("对象b:"+isEmptyObject(b));
+    		console.log("对象c:"+isEmptyObject(c));
+
+    		
+    		
+    	</script>
+    </body>
+</html>

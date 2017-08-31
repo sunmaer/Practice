@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>插入 li 元素</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      width: 100%;
+      list-style-type: none;
+    }
+    ul li {
+      box-sizing: border-box;
+      margin-bottom: 5px;
+      width: 100%;
+      line-height: 30px;
+      text-align: center;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+    }
+    ul li a {
+      text-decoration: none;
+      font-size: 13px;
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <ul id="ul"></ul>
+
+  <script>
+    /* ul 中插入 li 元素的几种方式 */
+    let ul = document.getElementById('ul')
+    const MAX_NODES = 10000
+
+    // 1. insertBefore()	在指定的已有的子节点之前插入新节点
+    // 调用了10000次ul.insertBefore()，每次都要产生一次页面渲染
+    // 在末尾插入新节点性能和appendChild()差不多，如果在指定子节点前插入新节点，影响文档树中的其他元素，渲染开销较大
+    for(let i=1; i<=MAX_NODES; i++) {
+      let li = document.createElement('li')
+      let a = document.createElement('a')
+      let text = document.createTextNode('insertBefore()-' + i)
+      a.appendChild(text)
+      li.appendChild(a)
+      ul.insertBefore(li, null)
+    }
+
+    // 2. appendChild()	向元素添加新的子节点，作为最后一个子节点
+    // 调用了10000次ul.appendChild()，每次都要产生一次页面渲染
+    for(let i=1; i<=MAX_NODES; i++) {
+      let li = document.createElement('li')
+      let a = document.createElement('a')
+      let text = document.createTextNode('appendChild()-' + i)
+      a.appendChild(text)
+      li.appendChild(a)
+      ul.appendChild(li)
+    }
+
+    // 3. innerHTML	设置或返回元素的内容
+    // 只需要一次页面渲染
+    // innerHTML插入上万个节点的时候，如果要插入的DIV里是空的，那么用innerHTML插入是最好的选择，速度也是最快的，但是当第二次插入的时候，你就会发现速度降低。如果div里已经有数据，innerHTML会逐一删除，然后再插入的新的数据，速度大大降低。
+    let liString = ''
+    for(let i=1; i<=MAX_NODES; i++) {
+      liString += '<li><a href="">innerHTML-' + i +'</a></li>'
+    }
+    ul.innerHTML = liString
+
+    // 4. 文档片段
+    // 只需要一次页面渲染
+    // 虽然不能把文档片段直接添加到文档中，但可以将它作为一个“仓库”来使用，即可以在里面保存将来可能会添加到文档中的节点。可以通过 appendChild() 或者 insertBefore() 将文档片段中内容添加到文档中。在将文档片段作为参数传递给这两个方法时，实际上只会将文档片段的所有子节点添加到相应位置上；文档片段本身永远不会成为文档树的一部分。
+    var fragment = document.createDocumentFragment()
+    for(let i=1; i<=MAX_NODES; i++) {
+      let li = document.createElement('li')
+      let a = document.createElement('a')
+      let text = document.createTextNode('DocumentFragment-' + i)
+      a.appendChild(text)
+      li.appendChild(a)
+      fragment.appendChild(li)
+    }
+    ul.appendChild(fragment)
+
+    // Jquery 插入DOM元素append() 方法源码
+    append: function() {
+      return domManip( this, arguments, function( elem ) {
+        if ( this.nodeType === 1 || this.nodeType === 11 || this.nodeType === 9 ) {
+          var target = manipulationTarget( this, elem );
+          target.appendChild( elem );
+        }
+      } );
+    },
+  </script>
+</body>
+</html>

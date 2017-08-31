@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+	<script>
+		/**
+		 * 函数内部属性
+		 * arguments this apply  call
+		 */
+		
+		//arguments对象,主要用途是保存函数参数
+		//这个对象有一个名叫callee的属性，该属性是一个指针，指向拥有这个arguments对象的函数
+		//消除紧密耦合
+		function a(num) {
+			if(num <= 1) {
+				return 1;
+			} else {
+				// 这种情况下 b(5) 返回0
+				// return num*a(num-1); 
+				// 这种情况下 b(5) 返回120
+				return num*arguments.callee(num-1); 
+			}
+		}
+
+		var b = a;
+		a = function() {
+			return 0;
+		}
+
+		// 这种情况下都是返回0，因为js没有函数重载，而且函数声明提前，所以后面声明的函数会覆盖前面的函数
+		// function a() {
+		// 	return 0;
+		// }
+		
+		// this对象引用的是函数据以执行的环境对象
+		window.color = "red";
+		var o = {color: "green"};
+
+		function c() {
+			alert(this.color);
+		}
+
+		o.c = c;
+		// o.c();
+
+		// ECMAScript5规范化了另一个函数对象的属性:caller 保存着调用当前函数的函数的引用
+		// 如果在全局作用域中调用当前函数，caller的值是null
+		function outer() {
+			inner();
+		}
+		function inner() {
+			alert(arguments.callee.caller);
+		}
+		outer();
+
+		// apply()和call()方法
+		// 作用：都是用来设置函数体内this对象的值，传递参数；扩充函数赖以运行的作用域
+
+		// alert(a(5));
+		// alert(b(5));
+		// c();
+	</script>
+
+    </body>
+</html>

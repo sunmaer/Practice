@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>百分比布局</title>
+    <style>
+        .grid {
+            width: 100%;
+        }
+        .grid__row__cell {
+            margin: 20px;
+            line-height: 60px;
+            text-align: center;
+            color: #333;
+            background-color: #F4F3F0;
+        }
+
+        .grid__row {
+            display: flex;
+        }
+        .grid__row__cell {
+            flex: 1;
+        }
+        .grid__row__cell--lo2 {
+            flex: 0 0 50%;
+        }
+        .grid__row__cell--lo3 {
+            flex: 0 0 33.3%;
+        }
+        .grid__row__cell--lo4 {
+            flex: 0 0 25%;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="grid">
+        <div class="grid__row">
+            <div class="grid__row__cell grid__row__cell--lo2">1/2</div>
+            <div class="grid__row__cell">auto</div>
+            <div class="grid__row__cell">auto</div>
+        </div>
+        <div class="grid__row">
+            <div class="grid__row__cell">auto</div>
+            <div class="grid__row__cell">auto</div>
+            <div class="grid__row__cell grid__row__cell--lo3">1/3</div>
+        </div>
+        <div class="grid__row">
+            <div class="grid__row__cell grid__row__cell--lo4">1/4</div>
+            <div class="grid__row__cell">auto</div>
+            <div class="grid__row__cell grid__row__cell--lo3">1/3</div>
+        </div>
+    </div>
+    
+</body>
+</html>

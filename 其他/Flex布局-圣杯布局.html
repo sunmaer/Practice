@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>圣杯布局</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        header,footer {
+            text-align: center;
+            background-color: #666;
+        }
+        .HolyGrail-left {
+            text-align: center;
+            background-color: springgreen;
+        }
+        .HolyGrail-main {
+            text-align: center;
+            background-color: yellow;
+        }
+        .HolyGrail-right {
+            text-align: center;
+            background-color: indianred;
+        }
+
+        /* Flex实现圣杯布局 */
+        .HolyGrail {
+            display: flex;
+            flex-direction: column;
+            min-height: 500px;
+        }
+        header,footer {
+            display: flex;
+            flex: 0 0 60px;
+            justify-content: center;
+            align-items: center;
+        }
+        .HolyGrail-body {
+            display: flex;
+            flex: 1;
+        }
+        .HolyGrail-main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .HolyGrail-left,.HolyGrail-right {
+            flex: 0 0 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+    @media (max-width: 768px) {
+      .HolyGrail-body {
+        flex-direction: column;
+        flex: 1;
+      }
+      .HolyGrail-left,
+      .HolyGrail-right,
+      .HolyGrail-main {
+        flex: auto;
+      }
+    }
+
+    </style>
+</head>
+<body class="HolyGrail">
+    <header>#header</header>
+    <div class="HolyGrail-body">
+        <div class="HolyGrail-left">#left</div>
+        <div class="HolyGrail-main">#center</div>
+        <div class="HolyGrail-right">#right</div>
+    </div>
+    <footer>#footer</footer>
+    
+</body>
+</html>

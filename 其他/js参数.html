@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+
+		<script>
+			 /**
+			  * 理解参数
+			  * 参数在内部是用一个数组来表示的
+			  * 函数体内可以通过arguments对象来访问这个参数数组
+			  * 命名的参数只提供便利，但不是必需的
+			  */
+			 function sayHi1(a,b) {
+			 	alert("Hello "+a+","+b);
+			 }
+			 // sayHi1("world","I love you");
+
+			 function sayHi2() {
+			 	alert("Hello "+arguments[0]+","+arguments[1]);
+			 }
+			 // sayHi2("world","I love you");
+
+			 /**
+			  * 弥补ECMAScript没有重载
+			  * 重载指调用的函数会根据同名函数传入参数的个数或类型准确定位到定义声明的函数上执行
+			  * 而由于js没有函数签名的概念，故不能重载
+			  */
+			 function doAdd() {
+			 	if(arguments.length == 1) {
+			 		alert(arguments[0] + 10);
+			 	} else if(arguments.length == 2) {
+			 		alert(arguments[0] + arguments[1]);
+			 	}
+			 }
+			 doAdd(10);
+			 doAdd(10,20);
+
+			 /**
+			  * arguments对象可以和函数参数一起使用
+			  */
+			  
+		</script>
+
+    </body>
+</html>

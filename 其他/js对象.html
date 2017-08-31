@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+    	<script>
+    		/**
+    		 * 对象
+    		 */
+    		
+    		// 创建对象的两种方式
+    		// 1、使用new操作符后跟Object构造函数
+    		var person = new Object();
+    		person.name = "孙梦海";
+    		person.age = 21;
+
+    		// 2、对象字面量方式
+    		var person1 = {
+    			name: "孙梦海",
+    			first name: "孙",
+    			age: 29//后面不能加逗号
+    		}
+    		// var person = {} 等价于 var person = new Object();
+    		
+    		// 访问对象属性的方法
+    		// 1、点表示法
+    		// alert(person.name);
+
+    		// 2、使用方括号来访问对象属性
+    		// alert(person["name"]);
+    		// 方括号优点1：可以通过变量来访问属性
+    		// var propertyName = "name";
+    		// alert(person[propertyName]);
+    		// 方括号优点2：属性名中可以包含非字母非数字
+    		alert(person["first name"]);
+
+    	</script>
+    </body>
+</html>
