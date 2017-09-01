@@ -4,9 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>双向布局</title>
+    <title>圣杯布局</title>
+    <style>
+        * {
+            margin: 0;
+            border: 0;
+        }
+        .float {
+            overflow: hidden;
+        }
+        .float .left {
+            margin-left: -100%;
+            float: left;
+            width: 200px;
+            height: 300px;
+            background-color: red;
+        }
+        .float .right {
+            margin-left: -200px;
+            float: left;
+            width: 200px;
+            height: 300px;
+            background-color: red;
+        }
+        .float .main {
+            box-sizing: border-box;
+            padding: 0 200px;
+            float: left;
+            width: 100%;
+
+            /* width: calc(100% - 400px); */
+
+            height: 300px;
+            background-color: green;
+        }
+    </style>
 </head>
 <body>
-    
+    <!-- 圣杯布局和双飞翼布局解决的问题是一样的，就是两边定宽，中间自适应的三栏布局，中间栏要放在文档流前面以优先渲染。 -->
+
+    <!-- 浮动实现圣杯布局 -->
+    <div class="float">
+        <div class="main">main</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
 </body>
 </html>
