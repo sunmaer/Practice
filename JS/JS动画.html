@@ -9,7 +9,6 @@
 	<style>
 		#block {
 			position: relative;
-      left: 0;
 			width: 100px;
 			height: 100px;
 			background-color: red;
@@ -18,21 +17,32 @@
 </head>
 
 <body>
-	<div id="block">
+	<div id="block" style="left: 0;">
 		😄
   </div>
   
   <script>
     /* 移动函数 */
-    function move(dom) {
-      alert(dom.style.left)
-      if(dom.style.left < 500) {
-        dom.style.left += 100 
-      }
+    function move(dom) { 
+      setTimeout(function() {
+        if(parseInt(dom.style.left) < 500) {
+          dom.style.left = parseInt(dom.style.left) + 10 + 'px'
+          move(dom)
+        }
+      }, 200)
     }
 
     let block = document.getElementById("block")
-    move(block)
+    // move(block)
+
+    /* requestAnimationFrame */
+    function moveFuc() {
+      if(parseInt(block.style.left) < 500) {
+        block.style.left = parseInt(block.style.left) + 10 + 'px'
+        requestAnimationFrame(moveFuc)
+      }
+    }
+    requestAnimationFrame(moveFuc)
   </script>
 </body>
 
