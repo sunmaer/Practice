@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>JS 动画</title>
+	<style>
+		#block {
+			position: relative;
+      left: 0;
+			width: 100px;
+			height: 100px;
+			background-color: red;
+		}
+  </style>
+</head>
+
+<body>
+	<div id="block">
+		😄
+  </div>
+  
+  <script>
+    /* 移动函数 */
+    function move(dom) {
+      alert(dom.style.left)
+      if(dom.style.left < 500) {
+        dom.style.left += 100 
+      }
+    }
+
+    let block = document.getElementById("block")
+    move(block)
+  </script>
+</body>
+
+</html>
