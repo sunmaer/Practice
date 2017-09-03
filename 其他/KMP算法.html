@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>KMP 算法</title>
+</head>
+<body>
+  <script>
+    /* 计算 next 数组 */
+    function getNext(str) {
+      let next = [], // next 表示长度为 i 的字符串前缀和后缀的最长公共部分，从1开始
+          len = str.length,
+          j = 0
+      next[0] = next[1] = 0
+      for(let i=1; i<len; i++) { // i 表示字符串的下标，从0开始
+        // j 在每次循环开始都表示 next[i] 的值，同时也表示需要比较的下一个位置
+        while(j>0 && str[i] !== str[j]) { j = next[j] }
+        if(str[i] === str[j]) { j++ }
+        next[i+1] = j
+      }
+      return next
+    }
+
+    let o = 'abcdhsabcfdhs'
+    console.log(getNext(o))
+  </script>
+</body>
+</html>
