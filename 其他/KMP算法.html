@@ -23,8 +23,24 @@
       return next
     }
 
+    /* 字符串匹配 */
+    function search(original, find) {
+      let next = getNext(find),
+          len = original.length,
+          j = 0
+      for(let i=0; i<len; i++) {
+        while(j>0 && original[i] !== find[j]) { j=next[j] }
+        if(original[i] === find[j]) { j++ }
+        if(j === find.length) {
+          console.log("find at position:" + (i - j + 2))
+          j = next[j]
+        }
+      }
+    }
+
     let o = 'abcdhsabcfdhs'
-    console.log(getNext(o))
+    let f = 'abc'
+    search(o, f)
   </script>
 </body>
 </html>
