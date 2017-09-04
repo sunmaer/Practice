@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>快速排序</title>
+</head>
+<body>
+	<script>
+		function quickSort(arr, low, high) {
+			if(low < high) {
+				let i = low, j = high, key = arr[low]
+				while(i < j) {
+					while(i < j && arr[j] >= key) { j-- }
+					if(i < j) { arr[i++] = arr[j] }
+					while(i < j && arr[i] < key) { i++ }
+					if(i < j) { arr[j--] = arr[i] }
+				}
+				arr[i] = key
+				quickSort(arr, low, i-1)
+				quickSort(arr, i+1, high)
+			}
+		}
+		let arr = [8, 2, 6, 1, 7, 3, 5, 4]
+		quickSort(arr, 0, arr.length-1)
+		console.log(arr)
+	</script>
+</body>
+</html>
