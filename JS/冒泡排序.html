@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>冒泡排序</title>
+</head>
+<body>
+	<script>
+		let arr = [8, 3, 5, 6, 2, 1, 4, 7]
+		bubbleSort(arr)
+		console.log(arr)
+
+		// 冒泡排序
+		function bubbleSort(arr) {
+			let length = arr.length, temp, flag = false
+			for(let i=0; i<length; i++) {
+				for(let j=0; j<length-i-1; j++) {
+					if(arr[j] > arr[j+1]) {
+						temp = arr[j]
+						arr[j] = arr[j+1]
+						arr[j+1] = temp
+						flag = true
+					}
+				}
+				if(flag === false) {
+					break
+				}
+			}
+		}
+	</script>
+</body>
+</html>
