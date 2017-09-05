@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单选择排序</title>
+</head>
+<body>
+	<script>
+		let arr = [8, 3, 5, 6, 2, 1, 4, 7]
+		selectSort(arr)
+		console.log(arr)
+
+		// 简单选择排序
+		function selectSort(arr) {
+			let length = arr.length, temp
+			for(let i=0; i<length; i++) {
+				let min = i
+				for(let j=i+1; j<length; j++) {
+					if(arr[min] > arr[j]) {
+						min = j
+					}
+				}
+				if(min !== i) {
+					temp = arr[min]
+					arr[min] = arr[i]
+					arr[i] = temp
+				}
+			}
+		}
+	</script>
+</body>
+</html>
