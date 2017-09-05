@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>折半查找</title>
+</head>
+<body>
+	<script>
+		let arr = [8, 3, 6, 7, 4, 1, 2, 5]
+		let key = prompt('请输入你要查找的元素：')
+		// binSearch(arr, parseInt(key))
+		search(arr, 0, arr.length-1, parseInt(key))
+
+		// 将数组排序
+		function binSearch(arr, key) {
+			if(Object.is(key, NaN)) {
+				alert('输入有误！')
+				return;
+			}
+			arr.sort(function(a, b) {
+				return a-b
+			})
+			let length = arr.length, low = 0, high = length - 1, mid = Math.floor((low+high)/2)
+			while(low <= high && key !== arr[mid]) {
+				if(key < arr[mid]) { high = mid - 1 }
+				if(key > arr[mid]) { low = mid + 1 }
+				mid = Math.floor((low+high)/2)
+ 			}
+ 			if(low > high) {
+ 				alert('数组中不存在该元素！')
+ 				return;
+ 			} else {
+ 				alert(key+'是数组的第'+(mid+1)+'个元素')
+ 				return;
+ 			}
+		}
+
+		// 不将数组排序，递归调用
+		function search(arr, low, high, key) {
+			if(Object.is(key, NaN)) {
+				alert('输入有误！')
+				return;
+			}
+			if(low <= high) {
+				let mid = Math.floor((low+high)/2)
+				if(key === arr[mid]) {
+					alert(key+'是数组的第'+(mid+1)+'个元素')
+ 					return;
+				}
+				search(arr, low, mid-1, key)
+				search(arr, mid+1, high, key)
+			}
+		}
+	</script>
+</body>
+</html>
