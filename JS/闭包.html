@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+</head>
+<body>
+	<script>
+		let result = []
+		for(var i=0; i<5; i++) {
+			result[i] = function() {
+				return i
+			}()
+		}
+		console.log(result) // 
+	</script>
+</body>
+</html>
