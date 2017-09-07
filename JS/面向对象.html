@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>面向对象</title>
+</head>
+<body>
+	<script>
+		/* 创建对象 */
+
+		// 工厂模式
+		// 问题：不知道某个对象的类型
+		function createPerson(name, age, job) {
+			let person = new Object()
+			person.name = name
+			person.age = age
+			person.job = job
+			person.sayName = function() {
+				return this.name
+			}
+			return person
+		}
+		let person1 = createPerson('sunmaer', 22, 'student')
+		console.log(person1.sayName())
+
+		// 构造函数模式
+		// 问题：每个方法在每个实例上重新创建
+		// 解决方法：1、方法的定义转移到构造函数外部 2、原型模式
+		function Person(name, age, job) {
+			this.name = name
+			this.age = age
+			this.job = job
+			this.sayName = function() {
+				return this.name
+			}
+		}
+		let person2 = new Person('sun', 23, 'player')
+		console.log(person2.sayName())
+
+		// 原型模式
+		// 问题：引用类型值共享
+		function Person1() {}
+		Person1.prototype.name = 'hello'
+		Person1.prototype.age = 22
+		Person1.prototype.job = 'world'
+		Person1.prototype.sayName = function() {
+			return this.name
+		}
+		let person3 = new Person1()
+		console.log(person3.sayName())
+		console.log(person3.constructor === Person1)
+		console.log(person3.__proto__ === Person1.prototype)
+		// 更简单的原型语法
+		function Person2() {}
+		Person2.prototype = {
+			constructor: Person2,
+			name: 'o',
+			age: 22,
+			job: 'p',
+			sayName: function() {
+				return this.name
+			}
+		}
+		let person4 = new Person2()
+		console.log(person4.sayName())
+		console.log(Person2.prototype.constructor === Person2)
+
+		// 组合使用构造函数模式和原型模式
+		// 构造函数模式用于定义实例属性，而原型模式用于定义方法和共享的属性
+		function Person3(name, age, job) {
+			this.name = name
+			this.age = age
+			this.job = job
+		}
+		Person3.prototype = {
+			constructor: Person3,
+			sayName: function() {
+				return this.name
+			}
+		}
+		let person5 = new Person3('meng', 22, 'ooo')
+		console.log(person5.sayName())
+	</script>
+</body>
+</html>
