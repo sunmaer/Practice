@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES6 class</title>
+</head>
+<body>
+	<script>
+		class SuperType {
+			constructor(name) {
+				this.name = name
+			}
+			sayName() {
+				return this.name
+			}
+		}
+		class SubType extends SuperType {
+			constructor(name, age) {
+				super(name)
+				this.age = age
+			}
+			sayAge() {
+				return this.age
+			}
+		}
+		let instance = new SubType('sunmaer', 22)
+		console.log(instance.sayName())
+		console.log(instance.sayAge())
+	</script>
+</body>
+</html>
