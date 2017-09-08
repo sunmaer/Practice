@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>距离</title>
+</head>
+<body>
+	<script>
+		var points = [10.00000000, 180.00000000, 183.00000000, 198.00000000], disArr = []
+		let len = points.length
+		for(let i=0; i<len; i++) {
+		    for(let j=i+1; j<len; j++) {
+		        let dis = points[j] - points[i]
+		        if(dis > 180.00000000) {
+		            disArr.push(360.00000000 - dis)
+		        } else disArr.push(dis)
+		    }
+		}
+		disArr.sort(function(a, b) {
+		    return a - b;
+		})
+		console.log(disArr[disArr.length-1].toFixed(8))
+	</script>
+</body>
+</html>
