@@ -54,15 +54,7 @@
 		    })
 		    tbody.appendChild(fragment)
 
-		    // 同步更新统计信息
-		    let sumTd = document.getElementById('jsTrolley').querySelector('tfoot').childNodes[0].childNodes[1], sum = 0, count = 0, length = tbody.childNodes.length
-		    for(let i=0; i<length; i++) {
-		    	if(tbody.childNodes[i].nodeType === 1) {
-		    		count++
-		    		sum += parseFloat(tbody.childNodes[i].childNodes[1].innerHTML)
-		    	}
-		    }
-		    sumTd.innerHTML = `${ sum.toFixed(2) }(${ count }件商品)`
+		    count()
 		}
 
 		function bind() {
@@ -72,20 +64,23 @@
 		        if(target.tagName = 'A') {
 		            let tr = target.parentNode.parentNode
 		            tbody.removeChild(tr)
-
-		            // 同步更新统计信息
-		    let sumTd = document.getElementById('jsTrolley').querySelector('tfoot').childNodes[0].childNodes[1], sum = 0, count = 0, length = tbody.childNodes.length
-				for(let i=0; i<length; i++) {
-					if(tbody.childNodes[i].nodeType === 1) {
-						count++
-						sum += parseFloat(tbody.childNodes[i].childNodes[1].innerHTML)
-					}
-				}
-				sumTd.innerHTML = `${ sum.toFixed(2) }(${ count }件商品)`
 		        }
 		    }, false)
+		    count()
 		    
 		}
+
+		function count() {
+            // 同步更新统计信息
+	    	let sumTd = document.getElementById('jsTrolley').querySelector('tfoot').childNodes[0].childNodes[1], sum = 0, count = 0, length = tbody.childNodes.length
+			for(let i=0; i<length; i++) {
+				if(tbody.childNodes[i].nodeType === 1) {
+					count++
+					sum += parseFloat(tbody.childNodes[i].childNodes[1].innerHTML)
+				}
+			}
+			sumTd.innerHTML = `${ sum.toFixed(2) }(${ count }件商品)`
+			}
 
 		let items = [{name: 'guofes', price: 250}]
 		add(items)
