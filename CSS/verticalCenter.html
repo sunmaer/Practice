@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>垂直居中</title>
+	<style>
+		#div1 {
+			width: 300px;
+			height: 300px;
+			background-color: red;
+		}
+		#div2 {
+			width: 100px;
+			background-color: blue;
+		}
+		/* (伪)元素占位方案 */
+		#div1 {
+			text-align: center; /* 水平居中 */
+			font-size: 0; /* 消除空隙 */
+		}
+		#div1::before {
+			content: '';
+			height: 100%;
+		}
+		#div1::before, #div2 {
+			display: inline-block;
+			vertical-align: middle;
+			font-size: 14px;
+		}
+	</style>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2">
+			未知高度
+		</div>
+	</div>
+</body>
+</html>
