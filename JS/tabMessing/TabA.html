@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TabA</title>
+</head>
+<body>
+	<div>
+		<p>这是tabA页面</p>
+		<button id="btn">发送消息</button>
+	</div>
+
+	<iframe src="http://localhost:8080/tabMessing/TabB.html" frameborder="5"></iframe>
+
+	<script>
+		var btn = document.querySelector('#btn');
+		btn.onclick = function() {
+			document.querySelector('iframe').contentWindow.postMessage('这是来自tabA页面的消息', 'http://localhost:8080/tabMessing/TabB.html')
+		}
+
+		window.addEventListener('message', function(e) {
+			alert(e.data);
+		}, false);
+	</script>
+</body>
+</html>

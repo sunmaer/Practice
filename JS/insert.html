@@ -36,7 +36,7 @@
   <script>
     function CreateNodes(){
     
-    for(var i = 0;i < 10000;i++){
+    for(var i = 0;i < 100000;i++){
 
         var tmpNode = document.createElement("div");
         tmpNode.innerHTML = "test" + i + " <br />";
@@ -49,7 +49,7 @@ function CreateFragments(){
 
     var fragment = document.createDocumentFragment();
 
-    for(var i = 0;i < 10000;i++){
+    for(var i = 0;i < 100000;i++){
 
         var tmpNode = document.createElement("div");
         tmpNode.innerHTML = "test" + i + "<br />";
@@ -58,7 +58,7 @@ function CreateFragments(){
 
     document.body.appendChild(fragment);
 }
-CreateNodes();
+// CreateNodes();
 CreateFragments();
     /* ul 中插入 li 元素的几种方式 */
     // let ul = document.getElementById('ul')
