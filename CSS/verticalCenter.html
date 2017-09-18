@@ -5,6 +5,7 @@
 	<title>垂直居中</title>
 	<style>
 		#div1 {
+			position: relative;
 			width: 300px;
 			height: 300px;
 			background-color: red;
@@ -14,9 +15,9 @@
 			background-color: blue;
 		}
 		/* (伪)元素占位方案 */
-		#div1 {
-			text-align: center; /* 水平居中 */
-			font-size: 0; /* 消除空隙 */
+/*		#div1 {
+			text-align: center;
+			font-size: 0;
 		}
 		#div1::before {
 			content: '';
@@ -26,6 +27,40 @@
 			display: inline-block;
 			vertical-align: middle;
 			font-size: 14px;
+		}*/
+
+		/* 利用 transform */
+		/*#div2 {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}*/
+
+		/* table-cell 方案 */
+/*		#div1 {
+			display: table-cell;
+			text-align: center;
+			vertical-align: middle;
+		}
+		#div2 {
+			display: inline-block;
+		}*/
+
+		/* flex 布局 */
+		/*#div1 {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}*/
+
+		/* flex+margin 方案 */
+		#div1 {
+			display: flex;
+			margin: 0;
+		}
+		#div2 {
+			margin: auto;
 		}
 	</style>
 </head>
