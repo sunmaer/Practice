@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>query和get选择符对比</title>
+</head>
+<body>
+	<div id="block">
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+		<p>4</p>
+	</div>
+
+	<script>
+		var block = document.getElementById('block');
+		// var nodes = document.getElementsByTagName('p');
+		var nodes = document.querySelectorAll('p');
+
+		let length = nodes.length;
+		for(let i=0; i<length; i++) {
+			let p = document.createElement('p');
+			p.innerHTML = 4 + i;
+			block.appendChild(p);
+			console.log(nodes.length);
+		}
+	</script>
+</body>
+</html>
