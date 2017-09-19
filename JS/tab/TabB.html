@@ -13,7 +13,7 @@
 
     window.addEventListener('message', function(e) {
       msg.innerHTML = e.data;
-      e.source.postMessage('消息已收到-tabB', 'http://localhost:8080/TabA.html');
+      e.source.postMessage('消息已收到-tabB', 'http://localhost:8081/TabA.html');
     }, false)
   </script>
 </body>
