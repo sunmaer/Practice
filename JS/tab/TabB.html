@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TabB</title>
+</head>
+<body>
+	<p>这是tabB页面</p>
+  	<p id="msg"></p>
+
+  <script>
+  	var msg = document.querySelector('#msg');
+
+    window.addEventListener('message', function(e) {
+      msg.innerHTML = e.data;
+      e.source.postMessage('消息已收到-tabB', 'http://localhost:8080/TabA.html');
+    }, false)
+  </script>
+</body>
+</html>

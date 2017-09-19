@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+</head>
+<body>
+	<script>
+		String.prototype.getSuffixList = function(suffix){
+	    //TODO：编写代码逻辑 ，不使用正则
+	    
+	    var result = '', count = {};
+	    var words = this.split(' ');
+	    var length = words.length;
+	    for(let i=0; i<length; i++) {
+	        if(words[i].indexOf(suffix) > 0) {
+	            count[words[i]] = 0;
+	        }
+	    }
+	    for(var p in count) {
+	        words.forEach(function(word, index) {
+	            if(p === word) { count[p]++; }
+	        })
+	    }
+	    
+	    var keys = Object.keys(count).sort(function(a,b) { return count[b]-count[a]; });
+	    for(var i=0; i<keys.length; i++) {
+	    	result += keys[i] + '=' +count[keys[i]] + ',';
+	    }
+
+	    result = result.substring(0, result.length-1);
+
+	    //输出结果
+	    return result;//字符串
+		}
+
+		console.log('a wonderful boy beautiful young beautiful lady grateful helpful'.getSuffixList('ful'));
+	</script>
+</body>
+</html>
