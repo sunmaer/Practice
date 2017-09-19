@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>A</title>
+</head>
+<body>
+	<div id="msg"></div>
+
+	<script>
+		let msg = document.querySelector('#msg');
+
+		// 发送消息
+		window.localStorage.setItem('msgToB', '你好，B');
+		window.localStorage.removeItem('msgToB');
+
+		// 接收消息
+		window.addEventListener('storage', function(e) {
+			if(e.newValue) {
+				msg.innerHTML = e.newValue;
+			}
+		}, false);
+		
+	</script>
+</body>
+</html>
