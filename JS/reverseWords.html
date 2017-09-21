@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>句子逆序</title>
+</head>
+<body>
+	<script>
+		var str = '   hello,   world...   ';
+		var reverseStr = str.split('').reverse(), length = reverseStr.length, word = [];
+
+		function isChar(char) {
+		    if((char > 'a' && char <'z')||(char > 'A' && char < 'Z')||char === "'") {
+		        return true;
+		    } else return false;
+		}
+
+		for(var i=0; i<length; i++) {
+		    if(isChar(reverseStr[i])) {
+		        word.push(reverseStr[i]);
+		    } else {
+		    		if(word.length) {
+		    			reverseStr.splice(i-word.length, word.length);
+			        for(var j=word.length; j>=0; j--) {
+			            reverseStr.splice(i-j, 0, word[j]);
+			        }
+		    		}
+		      	word = [];
+		    }
+		}
+
+		reverseStr = reverseStr.join('');
+		console.log(reverseStr);
+	</script>
+</body>
+</html>
