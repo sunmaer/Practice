@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>不透明单例模式</title>
+</head>
+<body>
+	<script>
+		var Singleton = function(name) {
+			this.name = name;
+			// this.instance = null;
+		}
+		Singleton.prototype.getName = function() {
+			return this.name;
+		}
+		Singleton.getInstance1 = function(name) { // 函数也是对象
+			console.log(this); // 谁调用该方法，this 就指向谁，所以这里 this 指向 Singleton 函数对象
+			console.log(this.name); // 'Singleton' 函数对象有一个 name 属性
+
+			/*
+			 * 'undefined' 第一次调用该方法时函数对象上没有 instance 属性，所以返回 undefined
+			 * Singleton { name: 'xx'} 第二次调用该方法时通过函数对象的 instance 属性返回创建的单例对象
+			 */
+			 console.log(this.instance);
+
+			/* 
+			 * 判断函数对象是否有 instance 属性
+			 * 如果没有则给函数对象添加 instance 属性，并将新创建的对象引用赋值给 instance 属性
+			 * 如果有则说明该函数已经存在实例，直接通过 instance 属性返回实例，从而实现单例模式
+			 */
+			if(!this.instance) {
+				this.instance = new Singleton(name);
+			}
+			return this.instance;
+		}
+
+		// 或者：
+		Singleton.getInstance = (function() {
+			var instance = null;
+
+			/*
+			 * 函数对象的 getInstance 属性为一个立即执行匿名函数，并返回一个内部匿名函数
+			 * 内部匿名函数在创建时，内部匿名函数的内部的 [[scope]] 属性包括全局对象和外部匿名函数的变量对象
+			 * 内部匿名函数调用时，会创建一个执行上下文，然后通过复制函数内部的 [[scrope]] 属性中的对象构建起执行上下文的作用域链
+			 * 此后，函数的活动对象被创建并被推入执行上下文作用域链的前端
+			 * 所以内部函数都可以访问父函数中的 instance 变量，而且所有内部函数中保存的都是 instance 变量的引用，即同一个 instance
+			 */
+			return function(name) {
+				console.log(instance);
+				if(!instance) {
+					instance = new Singleton(name);
+				}
+				return instance;
+			}
+		})();
+
+		var a = Singleton.getInstance('a');
+		console.log(a.name); // 'a'
+		var b = Singleton.getInstance('b');
+		console.log(b.name); // 'b'
+	</script>
+</body>
+</html>
