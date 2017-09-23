@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>时间格式化</title>
+</head>
+<body>
+	<script>
+		function pad(num, n) {
+			return (Array(n).join(0) + num).split('').slice(-n).join('');
+		}
+
+		Date.prototype.format = function () {
+			let year = this.getFullYear(),
+					month = pad(this.getMonth() + 1, 2),
+					date = pad(this.getDate(), 2),
+					hour = pad(this.getHours(), 2),
+					minute = pad(this.getMinutes(), 2),
+					second = pad(this.getSeconds(), 2)
+
+		  return `${ year }-${ month }-${ date } ${ hour }:${ minute }:${ second }`
+		}
+
+		setInterval(function() {
+			console.log(new Date().format())
+		}, 1000)
+	</script>
+</body>
+</html>

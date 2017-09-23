@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>location.search 转换为 map</title>
+</head>
+<body>
+	<script>
+		const param = location.search;
+
+		function convertToMap(param) {
+			let map = {}, paramArr = [];
+			param = param.substring(1); // 去除第一个问号
+			paramArr = param.split('&');
+			paramArr.forEach(function(item) {
+				let key = item.substring(0, item.indexOf('='));
+				let value = item.substring(item.indexOf('=')+1);
+				map[key] = value;
+			})
+			return map;
+		}
+
+		console.log(convertToMap(param));
+	</script>
+</body>
+</html>
