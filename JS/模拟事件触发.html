@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟事件触发</title>
+</head>
+<body>
+	<button id="btn">点击</button>
+
+	<script>
+		var btn = document.querySelector('#btn');
+		btn.onclick = function() {
+			alert('1');
+		}
+
+		// btn.click();
+
+	  var event = document.createEvent('MouseEvent');
+	  event.initMouseEvent('click', true);
+	  btn.dispatchEvent(event);
+
+	</script>
+</body>
+</html>
