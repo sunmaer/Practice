@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>重写 bind 方法</title>
+</head>
+<body>
+	<script>
+
+		// 实现 bind 方法
+		// Function.prototype.bind = function(o) {
+		// 	let that = this, boundArgs = arguments
+		// 	return function() {
+		// 		let args = []
+		// 		for(let i=1; i<boundArgs.length; i++) {
+		// 			args.push(boundArgs[i])
+		// 		}
+		// 		for(let i=0; i<arguments.length; i++) {
+		// 			args.push(arguments[i])
+		// 		}
+		// 		return that.apply(o, args)
+		// 	}
+		// }
+
+		// 重写 bind 方法
+		Function.prototype.bind = function(o) {
+			let that = this.self || this, boundArgs = arguments
+			let res = function() {
+				let args = []
+				for(let i=1; i<boundArgs.length; i++) {
+					args.push(boundArgs[i])
+				}
+				for(let i=0; i<arguments.length; i++) {
+					args.push(arguments[i])
+				}
+				return that.apply(o, args)
+			}
+			res.self = this
+			return res
+		}
+
+		var o = { x: 1 }
+		function foo(y) {
+			return this.x + y
+		}
+		var bar = foo.bind(o)
+	</script>
+</body>
+</html>
