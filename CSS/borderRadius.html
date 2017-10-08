@@ -3,8 +3,21 @@
 <head>
 	<meta charset="UTF-8">
 	<title>border-radius</title>
+	<style>
+		#block {
+			width: 300px;
+			height: 300px;
+			padding: 50px;
+			border: 50px solid red;
+			/* 
+			 * 百分比相对于元素的width加上border和padding
+			 * 大值特性和等比例特性
+			 */
+			border-radius: 100% 0 0 0;
+		}
+	</style>
 </head>
 <body>
-	
+	<div id="block"></div>
 </body>
 </html>
