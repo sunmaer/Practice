@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cssStyleDeclaration</title>
+	<style>
+		#block {
+			width: 100px;
+			height: 100px;
+		}
+		#block {
+			background-color: red;
+		}
+	</style>
+	<style>
+		#block {
+			width: 200px;
+			height: 200px;
+		}
+		#block {
+			background-color: blue;
+		}
+	</style>
+</head>
+<body>
+	<div id="block">
+		Hello World!
+	</div>
+
+	<script>
+		var styleObj= document.styleSheets[0].cssRules[0].style;
+		alert(styleObj.cssText);
+	</script>
+</body>
+</html>
