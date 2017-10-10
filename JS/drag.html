@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖动列表</title>
+	<style>
+		#members li {
+			cursor: move;
+		}
+		.dropList {
+			float: left;
+			width: 50%;
+		}
+		.highlighted {
+			background-color: yellow;
+		}
+		.validtarget {
+			background-color: lightblue;
+		}
+	</style>
+</head>
+<body>
+	<p>Drag members to either the Racers or Volunteers list.</p>
+	<ul id="members">
+		<li draggable="true" data-age="38">Brain Albers</li>
+		<li draggable="true" data-age="25">Frank Salim</li>
+		<li draggable="true" data-age="47">Jennifer Clark</li>
+		<li draggable="true" data-age="18">John Kemble</li>
+		<li draggable="true" data-age="20">Lorraine Gaunce</li>
+		<li draggable="true" data-age="30">Mark Wang</li>
+		<li draggable="true" data-age="41">Morgan Stephen</li>
+		<li draggable="true" data-age="39">Peter Lubbers</li>
+		<li draggable="true" data-age="33">Vanessa Combs</li>
+		<li draggable="true" data-age="54">Vivian Lopez</li>
+	</ul>
+
+	<div class="dropList">
+		<fieldset id="racersField">
+			<legend>Racers (by Age):</legend>
+			<ul id="racers"></ul>
+		</fieldset>
+	</div>
+
+	<div class="dropList">
+		<fieldset id="volunteersField">
+			<legend>Volunteers (by Name):</legend>
+			<ul id="volunteers"></ul>
+		</fieldset>
+	</div>
+
+	<script>
+		// 参赛者和志愿者成员姓名
+		var racers = [], volunteers = []
+		// 参赛者和志愿者列表
+		var racerList, volunteerList
+	</script>
+</body>
+</html>
