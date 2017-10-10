@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>location.hash单页应用路由</title>
+</head>
+<body>
+	<a href="#a">页面A</a>
+	<a href="#b">页面B</a>
+	<a href="#c">页面C</a>
+	<div id="container"></div>
+
+	<script>
+		var container = document.getElementById('container')
+
+		window.addEventListener('hashchange', function() {
+			switch(location.hash) {
+				case '#a':
+					pageA();
+					break;
+				case '#b':
+					pageB();
+					break;
+				case '#c':
+				 pageC();
+				 break;
+				default:
+					page();
+			}
+		}, false)
+
+		function page() {
+			container.innerHTML = '这是主页面'
+		}
+		function pageA() {
+			container.innerHTML = '这是页面A'
+		}
+		function pageB() {
+			container.innerHTML = '这是页面B'
+		}
+		function pageC() {
+			container.innerHTML = '这是页面C'
+		}
+	</script>
+</body>
+</html>

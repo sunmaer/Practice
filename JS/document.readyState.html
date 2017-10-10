@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>document.readyState</title>
+</head>
+<body>
+	<div id="mask" style="display: block;position: absolute;width: 100%;height: 100%;line-height: 500px;background-color: rgba(0, 0, 0, 0.7);text-align: center;color: #fff;">加载中...</div>
+	<div>
+		Hello World!
+	</div>
+	<img src="https://avatars3.githubusercontent.com/u/18280125?v=4&s=460" alt="單棲情緒">
+
+	<script>
+		var mask = document.querySelector('#mask')
+		// loading()
+		document.onreadystatechange = function () {
+			if(document.readyState === 'complete') {
+				complete()
+			}
+		}
+		function loading() {
+			mask.style.display = 'block'
+		}
+		function complete() {
+			mask.style.display = 'none'
+		}
+	</script>
+</body>
+</html>
