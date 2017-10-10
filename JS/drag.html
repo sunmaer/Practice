@@ -53,6 +53,126 @@
 		var racers = [], volunteers = []
 		// 参赛者和志愿者列表
 		var racerList, volunteerList
+
+		function drag() {
+			racerList = document.getElementById('racers')
+			volunteerList = document.getElementById('volunteers')
+
+			// 目标列表注册 drag enter、leave、drop 事件处理器
+			var lists = [racerList, volunteerList];
+			[].forEach.call(lists, function(list) {
+				list.addEventListener('dragenter', handleDragEnter, false)
+				list.addEventListener('dragleave', handleDragLeave, false)
+				list.addEventListener('drop', handleDrop, false)
+			})
+
+			// 每个目标列表都有一个特定的 dragover 事件处理器
+			racerList.addEventListener('dragover', handleDragOverRacers, false)
+			volunteerList.addEventListener('dragover', handleDragOverVolunteers, false)
+
+			// 列表外围的 fieldset 起到缓冲作用，用来重置 drag over 的样式
+			var fieldsets = document.querySelectorAll("#racerField #volunteersField");
+			[].forEach.call(fieldsets, function(fieldset) {
+				fieldset.addEventListener('dragover', handleDragOverOuter, false)
+			})
+
+			// 每个可拖动的成员都有拖动开始和结束事件处理器
+			var members = document.querySelectorAll('#members li');
+			[].forEach.call(members, function(member) {
+				member.addEventListener('dragstart', handleDragStart, false)
+				member.addEventListener('dragend', handleDragEnd, false)
+			})
+		}
+
+		// 开始拖动时调用
+		function handleDragStart(evt) {
+			evt.effectAllowed = 'copy'
+			evt.dataTransfer.setData('text/plain', evt.target.textContent)
+			evt.dataTransfer.setData('text/html', evt.target.dataset.age)
+
+			racerList.className = 'validtarget'
+			volunteerList.className = 'validtarget'
+
+			return true
+		}
+
+		function handleDragEnter(evt) {
+			evt.stopPropagation()
+			evt.preventDefault()
+			return false
+		}
+
+		function handleDragLeave(evt) {
+			return false
+		}
+
+		function handleDragOverOuter(evt) {
+			if(evt.target.id === 'racersField') {
+				racerList.className = 'validtarget'
+			} else if(evt.target.id === 'volunteersField') {
+				volunteerList.className = 'validtarget'
+			}
+			evt.stopPropagation()
+			return false
+		}
+
+		function handleDragOverVolunteers(evt) {
+			evt.dataTransfer.dropEffect = 'copy'
+			evt.stopPropagation()
+			evt.preventDefault()
+
+			racerList.className = 'validtarget'
+			return false
+		}
+
+		function handleDragOverRacers(evt) {
+			evt.dataTransfer.dropEffect = 'copy'
+			evt.stopPropagation()
+			evt.preventDefault()
+
+			volunteerList.className = 'validtarget'
+			return false
+		}
+
+		// 当用户在目标列表上进行放置操作时，传输数据
+		function handleDrop(evt) {
+			evt.preventDefault()
+			evt.stopPropagation()
+
+			var dropTarget = evt.target
+
+			var text = evt.dataTransfer.getData('text/plain')
+
+			var group = volunteers
+			var list = volunteerList
+
+			if((dropTarget.id !== 'volunteers') && (dropTarget.parentNode.id !== 'volunteers')) {
+				text = evt.dataTransfer.getData('text/html') + ': ' + text
+				group = racers
+				list = racerList
+			}
+
+			if(group.indexOf(text) === -1) {
+				group.push(text)
+				group.sort()
+
+				while(list.hasChildNodes()) {
+					list.removeChild(list.lastChild)
+				}
+
+				[].forEach.call(group, function(person) {
+					var newChild = document.createElement('li')
+					newChild.textContent = person
+					list.appendChild(newChild)
+				})
+			}
+			return false
+		}
+
+		window.onload = function() {
+			drag()
+		}
+
 	</script>
 </body>
 </html>
