@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>最大公约数</title>
+</head>
+<body>
+  <script>
+    function greatestCommonDivisor(a, b) {
+      var divisor = 1
+      // 循环 
+      // for(let i=Math.min(a, b); i>0; i--) {
+      //   if(a%i === 0 && b%i === 0) {
+      //     divisor = i
+      //     break
+      //   }
+      // }
+
+      // 欧几里得辗转相除法
+      var max = a > b ? a : b, min = a < b ? a : b
+      function gcd(max, min) {
+        if(min === 0) {
+          return max
+        } else {
+          return gcd(min, max%min)
+          // return gcd(min, max-min) // 减法也可以，但是迭代次数比取模多
+        }
+      }
+      divisor = gcd(max, min)
+      return divisor
+    }
+
+    var a = 24, b = 36
+    console.log(greatestCommonDivisor(a, b))
+  </script>
+</body>
+</html>
