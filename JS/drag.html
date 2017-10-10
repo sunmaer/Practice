@@ -11,6 +11,10 @@
 			float: left;
 			width: 50%;
 		}
+		#racers, #volunteers {
+			padding-top: 30px;
+			padding-bottom: 30px;
+		}
 		.highlighted {
 			background-color: yellow;
 		}
@@ -147,7 +151,7 @@
 			var list = volunteerList
 
 			if((dropTarget.id !== 'volunteers') && (dropTarget.parentNode.id !== 'volunteers')) {
-				text = evt.dataTransfer.getData('text/html') + ': ' + text
+				text = evt.dataTransfer.getData('text/html').substring(evt.dataTransfer.getData('text/html').indexOf('>')+1) + ': ' + text
 				group = racers
 				list = racerList
 			}
@@ -167,6 +171,12 @@
 				})
 			}
 			return false
+		}
+
+		function handleDragEnd(evt) {
+			racerList.className = null
+			volunteerList.className = null
+			return false 
 		}
 
 		window.onload = function() {
