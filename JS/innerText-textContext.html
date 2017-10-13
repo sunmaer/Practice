@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>innerText和textContent</title>
+</head>
+<body>
+  <p id="title">这是一段话 &nbsp;&nbsp;&nbsp;<span style="display: none;">哈哈</span></p>
+
+  <script>
+    var title = document.getElementById('title')
+    console.log('innerHTML: ' + title.innerHTML)
+    console.log('innerText: ' + title.innerText)
+    console.log('textContent: ' + title.textContent)
+  </script>
+</body>
+</html>
