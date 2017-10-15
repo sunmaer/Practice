@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数柯里化</title>
+</head>
+<body>
+  <script>
+    // curring 又称部分求值。一个 curring 的函数首先会接受一些参数，接受了这些参数之后，该函数并不会立即求值，而是继续返回另外一个函数，刚才传入的参数在函数形成的闭包中被保存起来。
+    // 待到函数被真正需要求值的时候，之前传入的所有参数都会被一次性用于求值。
+
+    // 计算每月开销函数
+    var monthlyCost = 0
+    var cost = function(money) {
+      monthlyCost += money
+    }
+
+    cost(100)
+    console.log(monthlyCost)
+
+    var cost1 = (function() {
+      var args = [] // 保存每个月的开销
+
+      return function() { // 返回一个新的函数
+        if(arguments.length === 0) { // 返回总开销
+          var money = 0;
+          money = [].reduce.call(args, function(sum, value) {
+            return sum + value
+          }, money)
+          return money
+        } else {
+          [].push.apply(args, arguments)
+        }
+      }
+    })()
+
+    // 通用柯里化函数
+    var curring = function(fn) {
+      var args = [] // 保存参数
+      return function() {
+        if(arguments.length === 0) {
+          return fn.apply(this, args)
+        } else {
+          [].push.apply(args, arguments)
+          return arguments.callee
+        }
+      }
+    }
+
+    var cost2 = (function() {
+      var money = 0
+      return function() {
+        money = [].reduce.call(arguments, function(sum, value) {
+          return sum + value
+        }, money)
+        return money
+      }
+    })()
+
+    var cost2 = curring(cost2) // 转化成 curring 函数
+    cost2(100)
+    cost2(200)(300)
+    console.log(cost2())
+  </script>
+</body>
+</html>
