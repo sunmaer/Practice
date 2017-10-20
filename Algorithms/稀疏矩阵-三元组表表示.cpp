@@ -38,6 +38,41 @@ void transMatrix(TSMatrix source, TSMatrix *dest) {
   }
 }
 
+/**
+ * 2) 一次定位快速转置法
+ */ 
+void FastTransposeTSMatrix(TSMatrix source, TSMatrix *dest) {
+  int num[MAXSIZE]; // 原矩阵每一列的非零元素个数
+  int position[MAXSIZE]; // 每一列第一个非零元素转置后在三元组表中的位置
+  dest->m = source.n;
+  dest->n = source.m;
+  dest->len = source.len;
+  
+  if(dest->len > 0) {
+    for(int i=0; i<source.n; i++) { // 初始化数组
+      num[i] = 0;
+    }
+
+    for(int i=0; i<source.len; i++) {
+      num[source.data[i].col]++;
+    }
+
+    position[0] = 1;
+    for(int i=1; i<source.n; i++) {
+      position[i] = position[i-1] + num[i-1];
+    }
+
+    for(int i=0; i<source.len; i++) {
+      int col = source.data[i].col;
+      int q = position[col];
+      dest->data[q].row = source.data[i].col;
+      dest->data[q].col = source.data[i].row;
+      dest->data[q].e = source.data[i].e;
+      position[col]++;
+    }
+  }
+}
+
 void display(TSMatrix m) { // 打印稀疏矩阵
   for(int i=0; i<m.m; i++) {
     for(int j=0; j<m.n; j++) {
@@ -73,7 +108,8 @@ int main() {
   cout<<"原矩阵："<<endl;
   display(source);
 
-  transMatrix(source, &dest);
+  // transMatrix(source, &dest);
+  FastTransposeTSMatrix(source, &dest);
   cout<<endl<<"转置后矩阵："<<endl;
   display(dest);
 
