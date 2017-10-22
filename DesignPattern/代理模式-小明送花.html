@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>代理模式-小明送花</title>
+</head>
+<body>
+  <script>
+    // 不使用代理模式
+    /* var Flower = function() {}
+
+    var xiaoming = {
+      sendFlower: function(target) {
+        var flower = new Flower()
+        target.receiveFlower(flower)
+      }
+    }
+
+    var A = {
+      receiveFlower: function(flower) {
+        console.log('收到花'+flower)
+      }
+    }
+
+    xiaoming.sendFlower(A) */
+
+    // 使用代理模式
+    /* var Flower = function() {}
+
+    var xiaoming = {
+      sendFlower: function(target) {
+        var flower = new Flower()
+        target.receiveFlower(flower)
+      }
+    }
+
+    var B = { // 代理 B
+      receiveFlower: function(flower) {
+        A.receiveFlower(flower)
+      }
+    }
+
+    var A = {
+      receiveFlower: function(flower) {
+        console.log('收到花'+flower)
+      }
+    }
+
+    xiaoming.sendFlower(B) */
+
+    // 代理模式
+    var Flower = function() {}
+
+    var xiaoming = {
+      sendFlower: function(target) {
+        var flower = new Flower()
+        target.receiveFlower(flower)
+      }
+    }
+
+    var B = { // 代理 B
+      receiveFlower: function(flower) {
+        A.listenGoodMood(function() { // 监听 A 的好心情
+          A.receiveFlower(flower)
+        })
+      }
+    }
+
+    var A = {
+      receiveFlower: function(flower) {
+        console.log('收到花'+flower)
+      },
+      listenGoodMood: function(fn) {
+        setTimeout(function() {
+          fn()
+        }, 1000)
+      }
+    }
+
+    xiaoming.sendFlower(B)
+
+  </script>
+</body>
+</html>
