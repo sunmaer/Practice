@@ -31,7 +31,22 @@
     console.log(proxyMult(1, 2, 3, 4))
     console.log(proxyMult(1, 2, 3, 4))
 
-    // 创建
+    // 创建缓存代理工厂
+    var createProxyFactory = function(fn) {
+      var cache = {}
+      return function() {
+        var args = [].join.call(arguments, ',')
+        if(cache[args]) {
+          return cache[args]
+        }
+        return cache[args] = fn.apply(this, arguments)
+      }
+    }
+
+    var proxyMulti = createProxyFactory(mult)
+
+    console.log(proxyMulti(1, 2, 3, 4))
+    console.log(proxyMulti(1, 2, 3, 4))
     
   </script>
 </body>
