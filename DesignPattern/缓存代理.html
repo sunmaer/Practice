@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>缓存代理</title>
+</head>
+<body>
+  <script>
+    var mult = function() {
+      console.log('开始计算乘积')
+      var a = 1
+      for(var i=0, arg; arg=arguments[i++];) {
+        a = a*arg
+      }
+      return a
+    }
+
+    var proxyMult = (function() {
+      var cache = {} // 缓存计算结果
+      return function() {
+        var args = [].join.call(arguments, ',')
+        if(cache[args]) {
+          return cache[args]
+        }
+        return cache[args] = mult.apply(this, arguments)
+      }
+    })()
+
+    console.log(proxyMult(1, 2, 3, 4))
+    console.log(proxyMult(1, 2, 3, 4))
+
+    // 创建
+    
+  </script>
+</body>
+</html>
