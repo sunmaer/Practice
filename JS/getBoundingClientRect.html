@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>getBoundingClientRect</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #div1 {
+      height: 1000px;
+      background-color: red;
+    }
+    #div2 {
+      height: 200px;
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div id="div1">
+    div1
+  </div>
+
+  <div id="div2">
+    div2
+  </div>
+
+  <script>
+    var div1 = document.getElementById('div1')
+    var div2 = document.getElementById('div2')
+    console.log(div2.offsetTop)
+    console.log(div2.getBoundingClientRect().top)
+  </script>
+</body>
+</html>
