@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>发布订阅模式通用实现</title>
+</head>
+<body>
+  <script>
+    var event = {
+      clientList: [],
+      listen: function(key, fn) {
+        if(!this.clientList[key]) {
+          this.clientList[key] = []
+        }
+
+        this.clientList[key].push(fn)
+      },
+      trigger: function() {
+        var key = [].shift.call(arguments)
+        var fns = this.clientList[key]
+
+        if(!fns || fns.length === 0) {
+          return false
+        }
+
+        for(var i=0, fn; fn=fns[i++];) {
+          fn.apply(this, arguments)
+        }
+      }
+    }
+
+    // install 函数，给所有对象动态安装发布订阅功能
+    var install = function(obj) {
+      for(var i in event) {
+        obj[i] = event[i]
+      }
+    }
+
+    var salesOffices = {}
+    install(salesOffices)
+
+    salesOffices.listen('squareMeter88', function(price) {
+      console.log('价格 = '+price)
+    })
+
+    salesOffices.listen('squareMeter100', function(price) {
+      console.log('价格 = '+price)
+    })
+
+    salesOffices.trigger('squareMeter88', 1000000)   
+    salesOffices.trigger('squareMeter100', 2000000)   
+  </script>
+</body>
+</html>
