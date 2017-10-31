@@ -77,7 +77,7 @@ void OutBiTree(BiTree *bt) // 输出二叉树
   }
 }
 
-void main() {
+int main() {
   BiTree *bt;
   char *gyb, str[MAXSIZE];
   int j=1;
@@ -85,7 +85,7 @@ void main() {
   printf("\n  1.将按照输入的二叉树广义表表示字符串生成对应的二叉树链式结构   ");
   printf("\n  2.输出二叉树的凹入法表示形式 r--根 0--左孩子 1--右孩子   ");
   printf("\n  输入示例：a(b(c,d(e,f)),i(j,k(x,y)))   ");
-  printf("\n*******************************************************");
+  printf("\n*******************************************************\n");
   printf("请输入二叉树的广义表形式：\n");
   gyb=str;
   scanf("%s", str);
@@ -93,4 +93,5 @@ void main() {
   printf("二叉树建立成功！\n");
   printf("此二叉树的凹入表示为：\n");
   OutBiTree(bt);
+  return 0;
 }
