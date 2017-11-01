@@ -104,6 +104,19 @@ void Postorder(BiTree *bt) // 后序遍历二叉树 左右根
   }
 }
 
+// 遍历算法的应用
+
+void leafNode(BiTree *root) // 先序遍历输出二叉树中叶子结点
+{
+  if(root != NULL) {
+    if(root->lchild == NULL && root->rchild == NULL) {
+      printf("%c", root->data);
+    }
+    leafNode(root->lchild);
+    leafNode(root->rchild);
+  }
+}
+
 int main() {
   BiTree *bt;
   char *gyb, str[MAXSIZE];
@@ -126,6 +139,8 @@ int main() {
   Inorder(bt);
   printf("\n后序遍历序列为：");
   Postorder(bt);
+  printf("\n叶子结点为：");
+  leafNode(bt);
   printf("\n");
   return 0;
 }
