@@ -86,6 +86,15 @@ void Preorder(BiTree *bt) // 先序遍历二叉树 根左右
   }
 }
 
+void Inorder(BiTree *bt) // 中序序遍历二叉树 左根右
+{
+  if(bt != NULL) {
+    Inorder(bt->lchild);
+    printf("%c", bt->data);
+    Inorder(bt->rchild);
+  }
+}
+
 int main() {
   BiTree *bt;
   char *gyb, str[MAXSIZE];
@@ -104,6 +113,7 @@ int main() {
   OutBiTree(bt);
   printf("\n先序遍历序列为：");
   Preorder(bt);
-  printf("\n");
+  printf("\n中序遍历序列为：");
+  Inorder(bt);
   return 0;
 }
