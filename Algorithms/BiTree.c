@@ -6,7 +6,7 @@ typedef struct BiNode
   char data;
   struct BiNode *lchild;
   struct BiNode *rchild;
-}BiTree;
+}BiTree, *BinTree;
 
 BiTree *CreateBiTreepre(char *str) // 创建二叉树
 {
@@ -117,6 +117,19 @@ void leafNode(BiTree *root) // 先序遍历输出二叉树中叶子结点
   }
 }
 
+void CreateBiTree(BinTree *bt) // 用扩展先序遍历序列创建二叉链表
+{
+  char ch;
+  ch=getchar();
+  if(ch=='.') (*bt)=NULL;
+  else {
+    (*bt)=(BiTree *)malloc(sizeof(BiTree));
+    (*bt)->data=ch;
+    CreateBiTree(&((*bt)->lchild));
+    CreateBiTree(&((*bt)->rchild));
+  }
+}
+
 int main() {
   BiTree *bt;
   char *gyb, str[MAXSIZE];
@@ -129,7 +142,8 @@ int main() {
   // printf("请输入二叉树的广义表形式：\n");
   gyb="a(b(c,d(e,f)),i(j,k(x,y)))";
   // scanf("%s", str);
-  bt=CreateBiTreepre(gyb);
+  // bt=CreateBiTreepre(gyb);
+  CreateBiTree(&bt);
   printf("二叉树建立成功！\n");
   printf("此二叉树的凹入表示为：\n");
   OutBiTree(bt);
