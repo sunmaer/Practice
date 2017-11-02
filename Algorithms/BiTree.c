@@ -154,6 +154,18 @@ void PreTreeDepth(BiTree *bt, int h) // 前序遍历求二叉树高度
   }
 }
 
+void PrintTree(BiTree *bt, int nLayer) // 按竖向树状打印二叉树
+{
+  if(bt == NULL) return;
+  PrintTree(bt->rchild, nLayer+1);
+  int i;
+  for(i=0; i<nLayer; i++) {
+    printf("    ");
+  }
+  printf("%c\n", bt->data);
+  PrintTree(bt->lchild, nLayer+1);
+}
+
 int main() {
   BiTree *bt;
   char *gyb, str[MAXSIZE];
@@ -171,6 +183,8 @@ int main() {
   printf("二叉树建立成功！\n");
   printf("此二叉树的凹入表示为：\n");
   OutBiTree(bt);
+  printf("按竖向树状打印二叉树：\n");
+  PrintTree(bt, 1);
   printf("\n二叉树高度为：%d", PostTreeDepth(bt));
   PreTreeDepth(bt, 1);
   printf("\n二叉树高度为：%d", depth);
