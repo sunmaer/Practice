@@ -130,6 +130,19 @@ void CreateBiTree(BinTree *bt) // 用扩展先序遍历序列创建二叉链表
   }
 }
 
+int PostTreeDepth(BiTree *bt) // 二叉树的高度
+{
+  int hl, hr, max;
+  if(bt != NULL) {
+    hl = PostTreeDepth(bt->lchild);
+    hr = PostTreeDepth(bt->rchild);
+    max = hl>hr ? hl:hr;
+    return (max+1);
+  } else {
+    return 0;
+  }
+}
+
 int main() {
   BiTree *bt;
   char *gyb, str[MAXSIZE];
@@ -147,6 +160,7 @@ int main() {
   printf("二叉树建立成功！\n");
   printf("此二叉树的凹入表示为：\n");
   OutBiTree(bt);
+  printf("\n二叉树高度为：%d", PostTreeDepth(bt));
   printf("\n先序遍历序列为：");
   Preorder(bt);
   printf("\n中序遍历序列为：");
