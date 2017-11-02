@@ -8,6 +8,8 @@ typedef struct BiNode
   struct BiNode *rchild;
 }BiTree, *BinTree;
 
+int depth = 0;
+
 BiTree *CreateBiTreepre(char *str) // 创建二叉树
 {
   BiTree *bt, *stack[MAXSIZE], *p=NULL;
@@ -130,7 +132,7 @@ void CreateBiTree(BinTree *bt) // 用扩展先序遍历序列创建二叉链表
   }
 }
 
-int PostTreeDepth(BiTree *bt) // 二叉树的高度
+int PostTreeDepth(BiTree *bt) // 后序遍历求二叉树的高度
 {
   int hl, hr, max;
   if(bt != NULL) {
@@ -140,6 +142,15 @@ int PostTreeDepth(BiTree *bt) // 二叉树的高度
     return (max+1);
   } else {
     return 0;
+  }
+}
+
+void PreTreeDepth(BiTree *bt, int h) // 前序遍历求二叉树高度
+{
+  if(bt != NULL) {
+    if(h>depth) depth = h;
+    PreTreeDepth(bt->lchild, h+1);
+    PreTreeDepth(bt->rchild, h+1);
   }
 }
 
@@ -161,6 +172,8 @@ int main() {
   printf("此二叉树的凹入表示为：\n");
   OutBiTree(bt);
   printf("\n二叉树高度为：%d", PostTreeDepth(bt));
+  PreTreeDepth(bt, 1);
+  printf("\n二叉树高度为：%d", depth);
   printf("\n先序遍历序列为：");
   Preorder(bt);
   printf("\n中序遍历序列为：");
