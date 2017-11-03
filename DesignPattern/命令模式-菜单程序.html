@@ -18,7 +18,8 @@
 
     var setCommand = function(button, command) {
       button.onclick = function() {
-        command.excute()
+        // command.excute()
+        command()
       }
     }
 
@@ -37,11 +38,18 @@
       }
     }
 
+    // var RefreshMenuBarCommand = function(receiver) {
+    //   this.receiver = receiver
+    // }
+    // RefreshMenuBarCommand.prototype.excute = function() {
+    //   this.receiver.refresh()
+    // }
+
+    // 闭包保存“接收者”
     var RefreshMenuBarCommand = function(receiver) {
-      this.receiver = receiver
-    }
-    RefreshMenuBarCommand.prototype.excute = function() {
-      this.receiver.refresh()
+      return function() {
+        receiver.refresh()
+      }
     }
 
     var AddSubMenuCommand = function(receiver) {
@@ -58,7 +66,7 @@
       this.receiver.del()
     }
 
-    var refreshMenuBarCommand = new RefreshMenuBarCommand(MenuBar)
+    var refreshMenuBarCommand = RefreshMenuBarCommand(MenuBar)
     var addSubMenuCommand = new AddSubMenuCommand(SubMenu)
     var delSubMenuCommand = new DelSubMenuCommand(SubMenu)
 
