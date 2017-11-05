@@ -18,8 +18,7 @@
 
     var setCommand = function(button, command) {
       button.onclick = function() {
-        // command.excute()
-        command()
+        command.excute()
       }
     }
 
@@ -47,8 +46,10 @@
 
     // 闭包保存“接收者”
     var RefreshMenuBarCommand = function(receiver) {
-      return function() {
-        receiver.refresh()
+      return {
+        excute: function() {
+          receiver.refresh()
+        }
       }
     }
 
