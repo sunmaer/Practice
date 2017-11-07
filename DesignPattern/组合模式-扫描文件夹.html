@@ -10,10 +10,12 @@
   <script>
     // Folder
     var Folder = function(name) {
+      this.parent = null
       this.name = name
       this.files = []
     }
     Folder.prototype.add = function(file) {
+      file.parent = this
       this.files.push(file)
     }
     Folder.prototype.scan = function() {
@@ -22,9 +24,21 @@
         file.scan()
       }
     }
+    Folder.prototype.remove = function() {
+      if(!this.parent) {
+        return;
+      }
+      for(var i=0; i<this.parent.files.length; i++ ) {
+        var file = this.parent.files[i]
+        if(file === this) {
+          this.parent.files.splice(i, 1)
+        }
+      }
+    }
 
     // File
     var File = function(name) {
+      this.parent = null
       this.name = name
     }
     File.prototype.add = function() {
@@ -32,6 +46,17 @@
     }
     File.prototype.scan = function() {
       console.log('开始扫描文件：' + this.name)
+    }
+    File.prototype.remove = function() {
+      if(!this.parent) {
+        return;
+      }
+      for(var i=0; i<this.parent.files.length; i++ ) {
+        var file = this.parent.files[i]
+        if(file === this) {
+          this.parent.files.splice(i, 1)
+        }
+      }
     }
 
     var folder = new Folder('学习资料')
@@ -48,6 +73,9 @@
     folder.add(folder1)
     folder.add(folder2)
     folder.add(file3) 
+
+    folder1.remove()
+    file3.remove()
 
     folder.scan()
   </script>
