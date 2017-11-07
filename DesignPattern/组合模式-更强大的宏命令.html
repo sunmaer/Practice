@@ -27,6 +27,9 @@
     var openAcCommand = {
       excute: function() {
         console.log('打开空凋')
+      },
+      add: function() {
+        throw new Error('叶对象不能添加子结点')
       }
     }
 
@@ -46,6 +49,7 @@
     var macroCommand1 = MacroCommand()
     macroCommand1.add(openAcCommand)
     macroCommand1.add(openSoundCommand)
+    openAcCommand.add(macroCommand1)
 
     var closeDoorCommand = {
       excute: function() {
