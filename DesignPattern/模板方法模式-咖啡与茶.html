@@ -70,6 +70,38 @@
       this.pourInCup()
       this.addCondiments()
     }
+
+    // 创建 Coffee 子类
+    var subCoffee = function() {}
+    subCoffee.prototype = new Beverage()
+    subCoffee.prototype.brew = function() {
+      console.log('用沸水冲泡咖啡')
+    }
+    subCoffee.prototype.pourInCup = function() {
+      console.log('把咖啡倒进杯子')
+    }
+    subCoffee.prototype.addCondiments = function() {
+      console.log('加糖和牛奶')
+    }
+
+    var subcoffee = new subCoffee()
+    subcoffee.init()
+
+    // 创建 Tea 子类
+    var subTea = function() {}
+    subTea.prototype = new Beverage()
+    subTea.prototype.brew = function() {
+      console.log('用沸水浸泡茶叶')
+    }
+    subTea.prototype.pourInCup = function() {
+      console.log('把茶倒进杯子')
+    }
+    subTea.prototype.addCondiments = function() {
+      console.log('加柠檬')
+    }
+
+    var subtea = new subTea()
+    subtea.init()
   </script>
 </body>
 </html>
