@@ -41,7 +41,7 @@
       this.successor = null
     }
     Chain.prototype.setSuccessor = function(successor) {
-      this.successor = successor
+      return this.successor = successor
     }
     Chain.prototype.passRequest = function() {
       var ret = this.fn.apply(this, arguments)
@@ -49,6 +49,8 @@
       if(ret === 'nextSuccessor') {
         return this.successor && this.successor.passRequest.apply(this.successor, arguments)
       }
+
+      return ret
     }
 
     var chainOrder500 = new Chain(order500)

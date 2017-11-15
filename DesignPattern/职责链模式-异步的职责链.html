@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>异步的职责链</title>
+</head>
+<body>
+  <script>
+    // 职责链
+    var Chain = function(fn) {
+      this.fn = fn
+      this.successor = null
+    }
+    Chain.prototype.setSuccessor = function(successor) {
+      return this.successor = successor
+    }
+    Chain.prototype.passRequest = function() {
+      var ret = this.fn.apply(this, arguments)
+
+      if(ret === 'nextSuccessor') {
+        return this.successor && this.successor.passRequest.apply(this.successor, arguments)
+      }
+
+      return ret
+    }
+    Chain.prototype.next = function() { // 手动传递请求给职责链中的下一个节点
+      return this.successor && this.successor.passRequest.apply(this.successor, arguments)
+    }
+
+    var fn1 = new Chain(function() {
+      console.log(1)
+      return 'nextSuccessor'
+    })
+
+    var fn2 = new Chain(function() {
+      console.log(2)
+      var self = this
+      setTimeout(function() {
+        self.next()
+      }, 1000)
+    })
+
+    var fn3 = new Chain(function() {
+      console.log(3)
+    })
+
+    fn1.setSuccessor(fn2).setSuccessor(fn3)
+    fn1.passRequest()
+  </script>
+</body>
+</html>
