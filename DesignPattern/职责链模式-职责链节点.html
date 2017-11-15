@@ -63,6 +63,24 @@
     chainOrder500.passRequest(1, true, 500)
     chainOrder500.passRequest(2, true, 500)
     chainOrder500.passRequest(1, false, 500)
+
+    // 使用 AOP 实现职责链
+    Function.prototype.after = function(fn) {
+      var self = this
+      return function() {
+        var ret = self.apply(this, arguments)
+        if(ret === 'nextSuccessor') {
+          return fn.apply(this, arguments)
+        }
+        return ret
+      }
+    }
+
+    var order = order500.after(order200).after(orderNormal)
+
+    order(1, true, 500)
+    order(2, true, 500)
+    order(1, false, 500)
   </script>
 </body>
 </html>
