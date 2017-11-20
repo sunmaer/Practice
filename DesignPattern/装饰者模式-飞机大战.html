@@ -8,31 +8,55 @@
 </head>
 <body>
   <script>
-    var Plane = function() {}
-    Plane.prototype.fire = function() {
-      console.log('发射普通子弹')
-    }
+    // var Plane = function() {}
+    // Plane.prototype.fire = function() {
+    //   console.log('发射普通子弹')
+    // }
 
-    var Missile = function(plane) {
-      this.plane = plane
+    // var Missile = function(plane) {
+    //   this.plane = plane
+    // }
+    // Missile.prototype.fire = function() {
+    //   this.plane.fire()
+    //   console.log('发射导弹')
+    // }
+
+    // var Atom = function(plane) {
+    //   this.plane = plane
+    // }
+    // Atom.prototype.fire = function() {
+    //   this.plane.fire()
+    //   console.log('发射原子弹')
+    // }
+
+    // var plane = new Plane()
+    // plane = new Missile(plane)
+    // plane = new Atom(plane)
+
+    // plane.fire()
+
+    // JavaScript 装饰者
+    var plane = {
+      fire: function() {
+        console.log('发射普通子弹')
+      }
     }
-    Missile.prototype.fire = function() {
-      this.plane.fire()
+    var missile = function() {
       console.log('发射导弹')
     }
-
-    var Atom = function(plane) {
-      this.plane = plane
-    }
-    Atom.prototype.fire = function() {
-      this.plane.fire()
+    var atom = function() {
       console.log('发射原子弹')
     }
-
-    var plane = new Plane()
-    plane = new Missile(plane)
-    plane = new Atom(plane)
-
+    var fire1 = plane.fire
+    plane.fire = function() {
+      fire1()
+      missile()
+    }
+    var fire2 = plane.fire
+    plane.fire = function() {
+      fire2()
+      atom()
+    }
     plane.fire()
   </script>
 </body>
