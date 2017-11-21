@@ -16,7 +16,7 @@
       var button = document.createElement('button')
       var self = this
 
-      button.innerHTML = '开关'
+      button.innerHTML = '弱光灯'
       this.button = document.body.appendChild(button)
       this.button.onclick = function() {
         self.buttonWasPressed()
@@ -34,12 +34,15 @@
       if(this.state === 'off') {
         console.log('弱光')
         this.state = 'weakLight'
+        this.button.innerHTML = '强光灯'
       } else if(this.state === 'weakLight') {
         console.log('强光')
         this.state = 'strongLight'
+        this.button.innerHTML = '关灯'
       } else if(this.state === 'strongLight') {
         console.log('关灯')
         this.state = 'off'
+        this.button.innerHTML = '弱光灯'
       }
     }
 
