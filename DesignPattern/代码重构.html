@@ -8,7 +8,25 @@
 </head>
 <body>
   <script>
-    
+    // 提炼函数
+    var getUserInfo = function() {
+      ajax('', function(data) {
+        console.log('userId: '+data.userId)
+        console.log('userName: '+data.userName)
+        console.log('nickName: '+data.nickName)
+      })
+    }
+    // 改成：
+    var getUserInfo = function() {
+      ajax('', function(data) {
+        printDetails(data)
+      })
+    }
+    function printDetails(data) {
+      console.log('userId: '+data.userId)
+      console.log('userName: '+data.userName)
+      console.log('nickName: '+data.nickName)
+    }
   </script>
 </body>
 </html>
