@@ -1,8 +1,13 @@
 var express = require('express')
 var path = require('path')
+var mongoose = require('mongoose')
+var _ = require('underscore')
+var Movie = require('./models/movie')
 var port = process.env.PORT || 3000
 var bodyParser = require('body-parser')
 var app = express()
+
+mongoose.connect('mongodb://localhost/movie')
 
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
@@ -14,57 +19,25 @@ console.log('movie started on port' + port)
 
 // index.page
 app.get('/', function(req, res) {
-  res.render('index', {
-    title: '首页',
-    movies: [
-      {
-        title: '军师联盟',
-        _id: 1,
-        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
-      },
-      {
-        title: '军师联盟',
-        _id: 2,
-        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
-      },
-      {
-        title: '军师联盟',
-        _id: 3,
-        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
-      },
-      {
-        title: '军师联盟',
-        _id: 4,
-        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
-      },
-      {
-        title: '军师联盟',
-        _id: 5,
-        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
-      },
-      {
-        title: '军师联盟',
-        _id: 6,
-        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
-      }
-    ]
+  Movie.fetch(function(err, movies) {
+    if(err) {
+      console.log(err)
+    }
+    res.render('index', {
+      title: '首页',
+      movies: movies
+    })
   })
 })
 
 // detail.page
 app.get('/movie/:id', function(req, res) {
-  res.render('detail', {
-    title: '详情页',
-    movie: {
-      doctor: '司马懿',
-      country: '中国',
-      title: '军师联盟',
-      year: 2014,
-      poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x',
-      language: '中文',
-      flash: 'http://player.youku.com/embed/XMzE2MjMwMjgyMA==',
-      summary: '青庐合卺酒，披红骑白马'
-    }
+  var id = req.params.id
+  Movie.findById(id, function(err, movie) {
+    res.render('detail', {
+      title: '详情页' + movie.title,
+      movie: movie
+    })
   })
 })
 
@@ -85,20 +58,73 @@ app.get('/admin/movie', function(req, res) {
   })
 })
 
+// admin update movie
+app.get('/admin/updata/:id', function(req, res) {
+  var id = req.params.id
+
+  if(id) {
+    Movie.findById(id, function(err, movie) {
+      res.render('admin', {
+        title: '后台录入页',
+        movie: movie
+      })
+    })
+  }
+})
+
+// admin post movie
+app.post('/admin/movie/new', function(res, req) {
+  var id = req.body.movie._id
+  var movieObj = req.body.movie
+  var _movie
+
+  if(id !== 'undefined') {
+    Movie.findById(id, function(err, movie) {
+      if(err) {
+        console.log(err)
+      }
+
+      _movie = _.extend(movie, movieObj)
+      _movie.save(function(err, movie) {
+        if(err) {
+          console.log(err)
+        }
+
+        res.redirect('/movie/' + movie._id)
+      })
+    })
+  } else {
+    _movie = new Movie({
+      doctor: movieObj.doctor,
+      title: movieObj.title,
+      country: movieObj.country,
+      language: movieObj.language,
+      year: movieObj.year,
+      poster: movieObj.poster,
+      summary: movieObj.summary,
+      flash: movieObj.flash
+    })
+
+    _movie.save(function(err, movie) {
+      if(err) {
+        console.log(err)
+      }
+
+      res.redirect('/movie/' + movie._id)
+    })
+  }
+})
+
 // list.page
 app.get('/admin/list', function(req, res) {
-  res.render('list', {
-    title: '列表页',
-    movies: [{
-      title: '军师联盟',
-      _id: 1,
-      doctor: '司马懿',
-      country: '中国',
-      year: 2014,
-      poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x',
-      language: '中文',
-      flash: 'http://player.youku.com/embed/XMzE2MjMwMjgyMA==',
-      summary: '青庐合卺酒，披红骑白马'
-    }]
+
+  Movie.fetch(function(err, movies) {
+    if(err) {
+      console.log(err)
+    }
+    res.render('list', {
+      title: '列表页',
+      movies: movies
+    })
   })
 })
