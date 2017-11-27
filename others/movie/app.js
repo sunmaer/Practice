@@ -56,14 +56,14 @@ app.get('/movie/:id', function(req, res) {
   res.render('detail', {
     title: '详情页',
     movie: {
-      doctor: '何塞',
-      country: '美国',
-      title: '机械战警',
+      doctor: '司马懿',
+      country: '中国',
+      title: '军师联盟',
       year: 2014,
       poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x',
-      language: '英语',
+      language: '中文',
       flash: 'http://player.youku.com/embed/XMzE2MjMwMjgyMA==',
-      summary: '哈哈哈哈哈哈哈'
+      summary: '青庐合卺酒，披红骑白马'
     }
   })
 })
