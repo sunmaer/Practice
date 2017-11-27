@@ -1,11 +1,12 @@
 var express = require('express')
 var path = require('path')
 var port = process.env.PORT || 3000
+var bodyParser = require('body-parser')
 var app = express()
 
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
-app.use(express.bodyParser())
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'bower_components')))
 app.listen(port)
 
@@ -14,37 +15,37 @@ console.log('movie started on port' + port)
 // index.page
 app.get('/', function(req, res) {
   res.render('index', {
-    title: 'movie 首页',
+    title: '首页',
     movies: [
       {
-        title: '机械战警',
+        title: '军师联盟',
         _id: 1,
-        poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg'
+        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
       },
       {
-        title: '机械战警',
+        title: '军师联盟',
         _id: 2,
-        poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg'
+        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
       },
       {
-        title: '机械战警',
+        title: '军师联盟',
         _id: 3,
-        poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg'
+        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
       },
       {
-        title: '机械战警',
+        title: '军师联盟',
         _id: 4,
-        poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg'
+        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
       },
       {
-        title: '机械战警',
+        title: '军师联盟',
         _id: 5,
-        poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg'
+        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
       },
       {
-        title: '机械战警',
+        title: '军师联盟',
         _id: 6,
-        poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg'
+        poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x'
       }
     ]
   })
@@ -53,15 +54,15 @@ app.get('/', function(req, res) {
 // detail.page
 app.get('/movie/:id', function(req, res) {
   res.render('detail', {
-    title: 'movie 详情页',
+    title: '详情页',
     movie: {
       doctor: '何塞',
       country: '美国',
       title: '机械战警',
       year: 2014,
-      poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg',
+      poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x',
       language: '英语',
-      flash: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg',
+      flash: 'http://player.youku.com/embed/XMzE2MjMwMjgyMA==',
       summary: '哈哈哈哈哈哈哈'
     }
   })
@@ -70,7 +71,7 @@ app.get('/movie/:id', function(req, res) {
 // admin.page
 app.get('/admin/movie', function(req, res) {
   res.render('admin', {
-    title: 'movie 后台录入页',
+    title: '后台录入页',
     movie: {
       title: '',
       doctor: '',
@@ -87,17 +88,17 @@ app.get('/admin/movie', function(req, res) {
 // list.page
 app.get('/admin/list', function(req, res) {
   res.render('list', {
-    title: 'movie 列表页',
+    title: '列表页',
     movies: [{
-      title: '机械战警',
+      title: '军师联盟',
       _id: 1,
-      doctor: '何塞',
-      country: '美国',
+      doctor: '司马懿',
+      country: '中国',
       year: 2014,
-      poster: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg',
-      language: '英语',
-      flash: 'https://img3.mukewang.com/58533fe900019f3006000338-240-135.jpg',
-      summary: '哈哈哈哈哈'
+      poster: 'https://image.uc.cn/o/wemedia/s/upload/1705232141c868a77c6b40ef11cbab74a449d10dc3;,3,jpegx;3,310x',
+      language: '中文',
+      flash: 'http://player.youku.com/embed/XMzE2MjMwMjgyMA==',
+      summary: '青庐合卺酒，披红骑白马'
     }]
   })
 })
