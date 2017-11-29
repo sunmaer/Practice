@@ -59,13 +59,13 @@ app.get('/admin/movie', function(req, res) {
 })
 
 // admin update movie
-app.get('/admin/updata/:id', function(req, res) {
+app.get('/admin/update/:id', function(req, res) {
   var id = req.params.id
 
   if(id) {
     Movie.findById(id, function(err, movie) {
       res.render('admin', {
-        title: '后台录入页',
+        title: '后台更新页',
         movie: movie
       })
     })
@@ -73,9 +73,9 @@ app.get('/admin/updata/:id', function(req, res) {
 })
 
 // admin post movie
-app.post('/admin/movie/new', function(res, req) {
-  var id = req.body.movie._id
-  var movieObj = req.body.movie
+app.post('/admin/movie/new', function(req, res) {
+  var id = req.body._id
+  var movieObj = req.body
   var _movie
 
   if(id !== 'undefined') {
