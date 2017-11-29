@@ -12,7 +12,7 @@ mongoose.connect('mongodb://localhost/movie')
 app.set('views', './views/pages')
 app.set('view engine', 'jade')
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(express.static(path.join(__dirname, 'bower_components')))
+app.use(express.static(path.join(__dirname, 'public')))
 app.locals.moment = require('moment')
 app.listen(port)
 
@@ -128,4 +128,20 @@ app.get('/admin/list', function(req, res) {
       movies: movies
     })
   })
+})
+
+// list delete movie
+app.delete('/admin/list', function(req, res) {
+  var id = req.query.id
+
+  if(id) {
+    Movie.remove({_id: id}, function(err) {
+      if(err) {
+        console.log(err)
+      }
+      else {
+        res.json({success: 1})
+      }
+    })
+  }
 })
