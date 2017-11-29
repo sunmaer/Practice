@@ -13,6 +13,7 @@ app.set('views', './views/pages')
 app.set('view engine', 'jade')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, 'bower_components')))
+app.locals.moment = require('moment')
 app.listen(port)
 
 console.log('movie started on port' + port)
