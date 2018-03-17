@@ -24,7 +24,10 @@ function start() {
 					console.log('[SELECT ERROR]-', err.message);
 					return;
 				}
-				response.write(JSON.stringify(result));
+				// response.write(JSON.stringify(result));
+				response.render('index.html', {
+					'h': 'ooo'
+				})
 				response.end();
 			});
 			connection.end();
