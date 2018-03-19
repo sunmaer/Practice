@@ -5,11 +5,12 @@ var fs = require('fs')
 var sequence = require('run-sequence')
 var watchify = require('watchify')
 var babel = require('gulp-babel')
+var connect = require('gulp-connect')
 
 gulp.task('default', function() {
 	// console.log('this is default task')
 	// shelljs.exec('browserify js/index.js -o js/main.js')
-	sequence('babel', 'babelWatch', 'mainjs')
+	sequence('connect', 'babel', 'babelWatch', 'mainjs')
 })
 
 gulp.task('mainjs', function() {
@@ -21,7 +22,7 @@ gulp.task('mainjs', function() {
 	})
 	b.bundle().pipe(fs.createWriteStream('js/main.js'))
 	b.on('update', function() {
-		b.bundle().pipe(fs.createWriteStream('js/main.js'))
+		b.bundle().pipe(fs.createWriteStream('main.js'))
 	})
 })
 
@@ -40,5 +41,13 @@ gulp.task('babel', function() {
 gulp.task('babelWatch', function() {
 	gulp.watch(['assets/js/*.js'], function() {
 		sequence('babel')
+	})
+})
+
+gulp.task('connect', function() {
+	connect.server({
+		root:'./',  
+		ip:'127.0.0.1',
+		livereload: true
 	})
 })
