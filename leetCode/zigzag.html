@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ZigZag Conversion</title>
+</head>
+<body>
+	<script>
+		/**
+		 * @param {string} s
+		 * @param {number} numRows
+	   * @return {string}
+		 */
+		var convert = function(s, numRows) {
+		  let len = s.length, zArr = [], col = Math.ceil(len / (numRows * 2 - 2) * (numRows - 1)), p = 0, str = ''
+		  if(len === 1 || numRows ===1 || len <= numRows) return s
+		  for(let i=0; s[p] && i<col; i=i+(numRows-1)) {
+		    for(let j=0; s[p] && j<(numRows-1); j++) {
+		      if((i+j) % (numRows-1) === 0) {
+		        for(let k=0; s[p] && k<numRows; k++) {
+		          zArr[k] = zArr[k] || []
+		          zArr[k][i+j] = s[p++]
+		        }
+		      } else {
+		        zArr[numRows - (i+j) % (numRows-1) - 1] = zArr[numRows - (i+j) % (numRows-1) - 1] || []
+		        zArr[numRows - (i+j) % (numRows-1) - 1][i+j] = s[p++]
+		      }
+		    }
+		  }
+		  for(let z of zArr) {
+		  	str += z.join('')
+		  }
+		  return str
+		}
+		console.log(convert('ABC', 2))
+	</script>
+</body>
+</html>
